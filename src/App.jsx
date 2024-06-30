@@ -5,6 +5,7 @@ import AboutUs from "./scenes/about";
 import ContactUs from "./scenes/contact";
 import ProductsList from "./scenes/product";
 import BlogList from "./scenes/blog";
+import './assets/scss/app.scss';
 
 const App = () => {
   return (
