@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/images/logo/pnf-papers.png';
 import './index.scss';
 import { BsCart, BsSearch } from 'react-icons/bs';
@@ -37,7 +37,7 @@ const Header = () => {
 
                 </div>
 
-                <div className='header-top-area py-3'>
+                <div className='header-top-area py-3 pb-0'>
 
                     <div className='container-xxl'>
 
@@ -140,6 +140,33 @@ const Header = () => {
                                         <p> 2000 Rs </p>
 
                                     </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div className='header-nav-area'>
+
+                        <div className='container-xxl'>
+
+                            <div className='row'>
+
+                                <div className='col-md-2'>
+
+                                </div>
+
+                                <div className='col-md-10'>
+
+                                    <ul className='custom-nav mb-0'>
+                                        <li> <NavLink to='/'> Home </NavLink> </li>
+                                        <li> <NavLink to='/about-us'> About Us </NavLink> </li>
+                                        <li> <NavLink to='/products'> Products </NavLink> </li>
+                                        <li> <NavLink to='/contact-us'> Contact Us</NavLink> </li>
+                                    </ul>
 
                                 </div>
 

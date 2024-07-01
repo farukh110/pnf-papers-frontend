@@ -70,6 +70,32 @@ header {
                 font-size: 30px;
             }
         }
+
+        .header-nav-area {
+
+            background: #7a8390;
+
+            .custom-nav {
+                list-style: none;
+                padding-left: 0px;
+
+                li:first-child {
+
+                    margin-left: 0px !important;
+                }
+
+                li {
+
+                    display: inline-block;
+                    margin: 10px;
+
+                    a {
+
+                        color: #ffffff;
+                    }
+                }
+            }
+        }
     }
 
 }
