@@ -5,8 +5,38 @@ import { BsCart, BsSearch } from 'react-icons/bs';
 import { FaCodeCompare } from 'react-icons/fa6';
 import { MdFavoriteBorder } from 'react-icons/md';
 import { LuUser2 } from 'react-icons/lu';
+import { DownOutlined, MenuOutlined } from '@ant-design/icons';
+import { Dropdown, Space } from 'antd';
 
 const Header = () => {
+
+    const items = [
+        {
+            key: '1',
+            label: (
+                <Link target="_blank" rel="noopener noreferrer" to="/">
+                    Venial Paper
+                </Link>
+            ),
+        },
+        {
+            key: '2',
+            label: (
+                <Link target="_blank" rel="noopener noreferrer" to="/">
+                    Frosted Paper
+                </Link>
+            ),
+        },
+        {
+            key: '3',
+            label: (
+                <Link target="_blank" rel="noopener noreferrer" to="/">
+                    Panaflex Paper
+                </Link>
+            ),
+        },
+    ];
+
     return (
         <>
             <header>
@@ -39,7 +69,7 @@ const Header = () => {
 
                 <div className='header-top-area py-3 pb-0'>
 
-                    <div className='container-xxl'>
+                    <div className='container-xxl pb-3'>
 
                         <div className='row'>
 
@@ -84,7 +114,7 @@ const Header = () => {
 
                                                 <FaCodeCompare className='custom-icon' />
 
-                                                <p> Compare Products </p>
+                                                <p className='mb-0'> Compare Products </p>
 
                                             </div>
 
@@ -100,7 +130,7 @@ const Header = () => {
 
                                                 <MdFavoriteBorder className='custom-icon' />
 
-                                                <p> Favourite Wishlist </p>
+                                                <p className='mb-0'> Favourite Wishlist </p>
 
                                             </div>
 
@@ -116,7 +146,7 @@ const Header = () => {
 
                                                 <LuUser2 className='custom-icon' />
 
-                                                <p> Sign in / Join </p>
+                                                <p className='mb-0'> Sign in / Join </p>
 
                                             </div>
 
@@ -137,7 +167,7 @@ const Header = () => {
                                             </div>
                                         </Link>
 
-                                        <p> 2000 Rs </p>
+                                        <p className='mb-0'> 2000 Rs </p>
 
                                     </div>
 
@@ -155,7 +185,23 @@ const Header = () => {
 
                             <div className='row'>
 
-                                <div className='col-md-2'>
+                                <div className='col-md-2 align-items-center pt-2'>
+
+                                    <div>
+                                        <Dropdown
+                                            menu={{
+                                                items,
+                                            }}
+                                        >
+                                            <a className='text-white' onClick={(e) => e.preventDefault()}>
+                                                <Space>
+                                                    <MenuOutlined />
+                                                    All Categories
+                                                    <DownOutlined />
+                                                </Space>
+                                            </a>
+                                        </Dropdown>
+                                    </div>
 
                                 </div>
 
