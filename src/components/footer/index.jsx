@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { FacebookFilled, TwitterOutlined, InstagramFilled, YoutubeFilled, PinterestFilled, LinkedinFilled } from '@ant-design/icons';
 import './index.scss';
 
 const Footer = () => {
@@ -71,13 +72,105 @@ const Footer = () => {
 
                     </div>
 
-                    <div className='row'>
+                    <div className='row gray-border py-3'>
 
-                        <div className='col-md-6'>
+                        <div className='col-md-5'>
+
+                            <div className="footer-social">
+                                <span className="social-title">Follow Us:</span>
+                                <a
+                                    href="https://www.facebook.com/b2b.made.in.china"
+                                    rel="nofollow"
+                                    target="_blank"
+                                    title="Follow us on facebook"
+                                >
+                                    <FacebookFilled />
+                                </a>
+                                <a
+                                    href="https://twitter.com/madeinchina_b2b"
+                                    target="_blank"
+                                    rel="nofollow"
+                                    title="Follow us on x"
+                                >
+                                    <TwitterOutlined />
+                                </a>
+                                <a
+                                    href="https://www.instagram.com/made_in_china_com/"
+                                    target="_blank"
+                                    rel="nofollow"
+                                    title="Follow us on instagram"
+                                >
+                                    <InstagramFilled />
+                                </a>
+                                <a
+                                    href="https://www.youtube.com/channel/UCJ3qXeohKQ2QpM76oFG8FOg"
+                                    target="_blank"
+                                    rel="nofollow"
+                                    title="Follow us on youtube"
+                                >
+                                    <YoutubeFilled />
+                                </a>
+                                <a
+                                    itemProp="sameAs"
+                                    href="https://www.pinterest.com/MadeinChinaB2B/"
+                                    target="_blank"
+                                    rel="nofollow"
+                                    title="Follow us on pinterest"
+                                >
+                                    <PinterestFilled />
+                                </a>
+                                <a
+                                    href="https://www.linkedin.com/company/made-in-china-com"
+                                    target="_blank"
+                                    rel="nofollow"
+                                    title="Follow us on linkedIn"
+                                >
+                                    <LinkedinFilled />
+                                </a>
+                            </div>
+
 
                         </div>
 
-                        <div className='col-md-6'>
+                        <div className='col-md-7 align-self-center'>
+
+                            <div className="footer-simple-links-group">
+                                <div className="m-footer-simple-links-row m-footer-copyright">
+                                    Copyright © {new Date().getFullYear()}
+                                    <Link
+                                        className="ms-1 me-1"
+                                        to="/"
+                                    >
+                                        Pnf-Papers
+
+                                    </Link>
+
+                                    All Rights Reserved.
+
+                                    <span className="m-gap-line" />
+                                    <Link
+                                        className="ms-1"
+                                        to="/user-agreement"
+                                    >
+                                        User Agreement
+                                    </Link>
+                                    <span className="m-gap-line" />
+                                    <Link
+                                        className="ms-1"
+                                        to="/declaration"
+                                    >
+                                        Declaration
+                                    </Link>
+                                    <span className="m-gap-line" />
+                                    <Link
+                                        className="ms-1"
+                                        to="/privacy-policy"
+                                    >
+                                        Privacy Policy
+                                    </Link>
+                                </div>
+                            </div>
+
 
                         </div>
 

@@ -1,10 +1,11 @@
 footer {
-    background: #E3E4E6;
+    background: #3F8CFF;
 
     h5 {
 
         font-size: 16px;
         font-weight: bold;
+        color: #fff;
     }
 
     .footer-menu {
@@ -13,8 +14,54 @@ footer {
 
         li {
             a {
-                color: #555;
+                color: #fff;
             }
+        }
+    }
+
+    .gray-border {
+
+        border-top: 1px solid #cacbcc;
+        border-bottom: 1px solid #cacbcc;
+    }
+
+    .footer-social {
+
+        .social-title {
+
+            vertical-align: text-bottom;
+            color: #fff;
+        }
+
+        a {
+            margin-left: 5px;
+            font-size: 21px;
+            color: #fff;
+            transition: all 0.4s;
+
+            &:hover {
+
+                color: #fff;
+            }
+        }
+    }
+
+    .footer-simple-links-group {
+
+        font-size: 14px;
+        color: #fff;
+
+        a {
+            color: #fff;
+        }
+
+        .m-gap-line {
+
+            border-left: 1px solid #fff;
+            margin: 3px 10px 0 10px;
+            display: inline-block;
+            height: 12px;
+            vertical-align: top;
         }
     }
 }
