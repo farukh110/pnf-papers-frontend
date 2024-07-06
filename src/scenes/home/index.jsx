@@ -8,30 +8,50 @@ import 'swiper/css/pagination';
 import p1 from '../../assets/images/slider/indoor.webp';
 import p2 from '../../assets/images/slider/indoor2.jpg';
 import p3 from '../../assets/images/slider/flex-banner4.jpg';
-import p4 from '../../assets/images/slider/p4.jpg';
+import p4 from '../../assets/images/slider/frontlit-banner02-175998.jpg';
+import p5 from '../../assets/images/slider/38a0b9232.png';
+import p6 from '../../assets/images/slider/pvc.webp';
 
 import './index.scss';
 
 import { Autoplay, Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
+import CategoryBox from './CategoryBox';
+import VerticalDemo from './VerticalDemo';
 
 const slides = [
-    { id: 1, imageUrl: p1, caption: 'Slide 1' },
-    { id: 2, imageUrl: p2, caption: 'Slide 2' },
-    { id: 3, imageUrl: p3, caption: 'Slide 3' },
-    { id: 4, imageUrl: p4, caption: 'Slide 4' },
+    {
+        id: 1,
+        imageUrl: p1,
+        textClass: 'text-dark',
+        caption: 'Low Price Supplier Frontlit Backlit Flex Banner Advertising Banner Roll up Flex Banner PVC Light Fabric'
+    },
+    {
+        id: 2,
+        imageUrl: p2,
+        textClass: 'text-dark',
+        caption: 'PVC Flex Banner Blockout 440g Double Side Printing Banner'
+    },
+    {
+        id: 3,
+        imageUrl: p3,
+        textClass: 'text-light',
+        caption: 'Hot Laminated 13oz/440g PVC Flex Banner Digital Printing'
+    },
 ];
 
 const Home = () => (
 
     <div className='container'>
         <div className='row mt-md-4 mb-md-4'>
-            <div className='col-md-2'></div>
+            <div className='col-md-2'>
+                <VerticalDemo />
+            </div>
             <div className='col-md-8'>
                 <Swiper
                     cssMode={true}
                     navigation={true}
                     autoplay={{
-                        delay: 2500,
+                        delay: 3500,
                         disableOnInteraction: false,
                     }}
                     pagination={{
@@ -45,13 +65,31 @@ const Home = () => (
                     {slides.map((slide) => (
                         <SwiperSlide key={slide.id} style={{ backgroundImage: `url(${slide.imageUrl})` }}>
                             <div className="slide-content">
-                                <h3>{slide.caption}</h3>
+                                <h3 className={`${slide.textClass}`}>{slide.caption}</h3>
+                                <button className='btn btn-dark mt-md-3 btn-view-more ps-3 pe-3'> View More </button>
                             </div>
                         </SwiperSlide>
                     ))}
                 </Swiper>
             </div>
-            <div className='col-md-2'></div>
+            <div className='col-md-2'>
+
+                <CategoryBox
+                    imageSource={p4}
+                    title="product 1"
+                />
+
+                <CategoryBox
+                    imageSource={p5}
+                    title="product 2"
+                />
+
+                <CategoryBox
+                    imageSource={p6}
+                    title="product 3"
+                />
+
+            </div>
         </div>
     </div>
 );
