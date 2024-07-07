@@ -1,0 +1,33 @@
+.vertical-content-item {
+
+    img {
+        height: 120px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .product-name {
+
+        font-size: 14px;
+    }
+
+    .price {
+        font-size: 14px;
+        color: #505253;
+    }
+
+    .btn-now {
+
+        font-size: 14px;
+        color: #70737C;
+        font-weight: 500;
+    }
+}
+
+.btn-view {
+
+    background: #0C1D36;
+    border-radius: 50px;
+    margin: 0 auto;
+    display: table;
+}

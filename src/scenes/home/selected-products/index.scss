@@ -1,0 +1,28 @@
+.selected-products {
+
+    .selected-items-container {
+        background: #fff;
+        // border: 1px solid #e6ecf2;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+
+        .product-item {
+
+            .product-img {
+
+                transition: all 0.3s;
+                height: 200px;
+                width: 100%;
+                object-fit: cover;
+
+                &:hover {
+                    transform: scale(1.1);
+                    /* Scale to 1.1 for a noticeable effect */
+                }
+            }
+        }
+
+        .selected-item-title {
+            font-size: 20px;
+        }
+    }
+}
