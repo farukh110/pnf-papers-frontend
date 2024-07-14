@@ -7,6 +7,7 @@ import { MdFavoriteBorder } from 'react-icons/md';
 import { LuUser2 } from 'react-icons/lu';
 import { DownOutlined, MenuOutlined } from '@ant-design/icons';
 import { Dropdown, Space } from 'antd';
+import { GoGitCompare } from 'react-icons/go';
 
 const Header = () => {
 
@@ -112,8 +113,7 @@ const Header = () => {
 
                                             <div className='icon-content'>
 
-                                                <FaCodeCompare className='custom-icon' />
-
+                                                <GoGitCompare className='custom-icon' />
                                                 <p className='mb-0'> Compare Products </p>
 
                                             </div>
