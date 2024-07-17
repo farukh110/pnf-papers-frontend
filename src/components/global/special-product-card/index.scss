@@ -51,6 +51,24 @@
             font-size: 16px;
             color: #0C1D36;
         }
+
+        .custom-badge {
+
+            background: #bf4800;
+            color: #fff;
+            border-radius: 100px;
+            height: 55px;
+            width: 100%;
+            font-size: 25px;
+            padding: 7px;
+        }
+
+        .btn-cart {
+
+            background: #70737C;
+            border-color: #70737C;
+            border-radius: 50px !important;
+        }
     }
 
     .action-bar {

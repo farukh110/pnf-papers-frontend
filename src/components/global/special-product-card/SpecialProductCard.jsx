@@ -6,6 +6,7 @@ import { HiOutlineEye } from "react-icons/hi";
 import { GoGitCompare } from "react-icons/go";
 import { CiHeart } from "react-icons/ci";
 import { FaRegHeart } from "react-icons/fa6";
+import { Progress } from 'antd';
 
 const SpecialProductCard = () => {
     return (
@@ -51,7 +52,69 @@ const SpecialProductCard = () => {
                         activeColor="#ffd700"
                     />
 
-                    <p className='price'> Rs 6000 </p>
+                    <p className='price'> Rs 6000 <strike> 2000 </strike> </p>
+
+                    <div className="row">
+
+                        <div className="col-md-3">
+
+                            <strong> 5 </strong>
+                            <p> days </p>
+
+                        </div>
+
+                        <div className="col-md-9">
+
+                            <div className="row">
+
+                                <div className="col-md-4">
+
+                                    <div className="custom-badge">
+                                        1
+                                    </div>
+
+                                </div>
+
+                                <div className="col-md-4">
+
+                                    <div className="custom-badge">
+                                        1
+                                    </div>
+
+                                </div>
+
+                                <div className="col-md-4">
+
+                                    <div className="custom-badge">
+                                        1
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div className="row">
+
+                        <div className="col-md-4">
+
+                            5 Products
+
+                        </div>
+
+                        <div className="col-md-8">
+
+                            <Progress percent={30} />
+
+                        </div>
+
+                    </div>
+
+                    <button className="btn btn-dark btn-cart mt-md-3"> Add to Cart </button>
+
 
                 </div>
 
