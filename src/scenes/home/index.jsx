@@ -5,6 +5,7 @@ import "./index.scss";
 import Brands from "./brands";
 import Blogs from "./blogs";
 import OurProducts from "./our-products";
+import SpecialProducts from "./special-products";
 
 const Home = () => {
     return (
@@ -13,6 +14,7 @@ const Home = () => {
             <Services />
             <SelectedProducts />
             <OurProducts />
+            <SpecialProducts />
             <Brands />
             <Blogs />
         </>
