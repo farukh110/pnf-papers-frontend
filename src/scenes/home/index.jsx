@@ -6,6 +6,7 @@ import Brands from "./brands";
 import Blogs from "./blogs";
 import OurProducts from "./our-products";
 import SpecialProducts from "./special-products";
+import PopularProducts from "./popular-products";
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
             <SelectedProducts />
             <OurProducts />
             <SpecialProducts />
+            <PopularProducts />
             <Brands />
             <Blogs />
         </>
