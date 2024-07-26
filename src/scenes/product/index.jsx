@@ -3,10 +3,56 @@ import './index.scss';
 import { Link } from 'react-router-dom';
 import CustomBreadcrumb from '../../components/global/controls/bread-crumb/CustomBreadcrumb';
 import Meta from '../../components/global/seo/Meta';
-import { Checkbox, InputNumber, Tag } from 'antd';
+import { Checkbox, InputNumber, Select, Tag } from 'antd';
 import ReactStars from 'react-rating-stars-component';
+import { useState } from 'react';
+import ProductCard from './../../components/global/product-card/ProductCard';
 
 const ProductsList = () => {
+
+    const [productsGrid, setProductsGrid] = useState(4);
+
+    const onGridControl = (item) => {
+
+        console.log('item: ', item);
+        setProductsGrid(item);
+    }
+
+    const sortByItems = [
+        {
+            value: '1',
+            label: 'Featured',
+        },
+        {
+            value: '2',
+            label: 'Best Selling',
+        },
+        {
+            value: '3',
+            label: 'Alphabetically, A-Z',
+        },
+        {
+            value: '4',
+            label: 'Alphabetically, Z-A',
+        },
+        {
+            value: '5',
+            label: 'Price, Low to High',
+        },
+        {
+            value: '6',
+            label: 'Price, High to Low',
+        },
+        {
+            value: '7',
+            label: 'Date, Old to New',
+        },
+        {
+            value: '8',
+            label: 'Date, New to Old',
+        },
+    ];
+
     return (
         <>
             <Meta
@@ -330,6 +376,87 @@ const ProductsList = () => {
                         </div>
 
                         <div className='col-md-9'>
+
+                            <div className='row custom-toolbar justify-content-between p-3'>
+
+                                <div className='col-md-4'>
+
+                                    <div className='row align-items-center'>
+
+                                        <div className='col-md-3'>
+                                            <p className='mb-0'> Sort By </p>
+                                        </div>
+
+                                        <div className='col-md-9'>
+                                            <Select
+                                                showSearch
+                                                style={{
+                                                    width: "100%",
+                                                }}
+                                                placeholder="Search to Select"
+                                                optionFilterProp="label"
+                                                filterSort={(optionA, optionB) =>
+                                                    (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+                                                }
+                                                options={sortByItems}
+                                            />
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div className='col-md-4'>
+
+                                    <div className='row'>
+
+                                        <div className='col-md-4'>
+                                            <p className='products-count mt-1 mb-0'> 40 Products </p>
+                                            <i className='pi pi-align-justif'></i>
+                                        </div>
+
+                                        <div className='col-md-8'>
+
+                                            <div className="btn-group grid-btn-group w-100">
+                                                <button type="button" onClick={() => onGridControl(3)} className="btn btn-primary">
+                                                    <i className="bi bi-grid-3x3-gap"></i>
+                                                </button>
+                                                <button type="button" onClick={() => onGridControl(4)} className="btn btn-primary">
+                                                    <i className="bi bi-grid-3x2"></i>
+                                                </button>
+                                                <button type="button" onClick={() => onGridControl(6)} className="btn btn-primary">
+                                                    <i className="bi bi-grid"></i>
+                                                </button>
+                                                <button type="button" onClick={() => onGridControl(12)} className="btn btn-primary">
+                                                    <i className="bi bi-list"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            {/* products list */}
+
+                            <div className='products-list mt-md-4'>
+
+                                <div className='row'>
+
+                                    <ProductCard productsGrid={productsGrid} />
+
+                                    <ProductCard productsGrid={productsGrid} />
+
+                                    <ProductCard productsGrid={productsGrid} />
+
+                                    <ProductCard productsGrid={productsGrid} />
+
+                                </div>
+
+                            </div>
+
                         </div>
 
                     </div>

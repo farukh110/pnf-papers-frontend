@@ -1,5 +1,5 @@
 import ReactStars from "react-rating-stars-component";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import './index.scss';
 import { BsCartPlus } from "react-icons/bs";
 import { HiOutlineEye } from "react-icons/hi";
@@ -7,9 +7,16 @@ import { GoGitCompare } from "react-icons/go";
 import { CiHeart } from "react-icons/ci";
 import { FaRegHeart } from "react-icons/fa6";
 
-const ProductCard = () => {
+const ProductCard = (props) => {
+
+    const { productsGrid } = props;
+
+    let location = useLocation();
+
+    console.log('location: ', location);
+
     return (
-        <div className='col-md-3'>
+        <div className={`${location.pathname == "/products" ? `col-md-${productsGrid}` : `col-md-3`}`}>
 
             <div className='product-item position-relative text-center'>
 
@@ -50,6 +57,8 @@ const ProductCard = () => {
                         edit={false}
                         activeColor="#ffd700"
                     />
+
+                    <p className={`description ${productsGrid === 12 ? "d-block" : "d-none"}`}>Haining Fuxing Compound New Material Co., Ltd.Custom manufacturer. was established in 2003. We are specialized in producing customized PVC flex banner materials. Provide (240-800gsm) PVC flex banners. Customized colors are available.</p>
 
                     <p className='price'> Rs 6000 </p>
 
