@@ -16,8 +16,8 @@ const ResetPassword = () => {
     return (
         <>
             <Meta
-                title="Forgot Password"
-                link="/forgot-password"
+                title="Reset Password"
+                link="/reset-password"
             />
 
             <section className="auth-container my-3">

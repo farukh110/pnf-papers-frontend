@@ -20,7 +20,7 @@ const BlogCard = (props) => {
                     <h5> title </h5>
                     <p className='content'>content </p>
 
-                    <Link className='btn btn-dark btn-read-more' to="/"> Read More </Link>
+                    <Link className='btn btn-dark btn-read-more' to="/blog/:id"> Read More </Link>
 
                 </div>
             </div>

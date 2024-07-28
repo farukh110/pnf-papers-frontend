@@ -1,0 +1,48 @@
+.blog-detail-content {
+
+    background: #fff;
+    border-radius: 10px;
+
+    .blog-img {
+
+        img {
+
+            width: 100%;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+    }
+
+    .content {
+
+        h1 {
+
+            font-size: 30px;
+        }
+
+        .date {
+
+            font-size: 14px;
+            line-height: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            font-weight: 400;
+            color: #70737C;
+        }
+
+        .content {
+
+            font-size: 13px;
+            line-height: 22px;
+            color: #777777;
+        }
+
+        .btn-read-more {
+
+            border-radius: 30px;
+            background: #70737C;
+            border-color: #70737C;
+            font-size: 14px;
+        }
+    }
+}

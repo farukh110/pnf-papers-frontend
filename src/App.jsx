@@ -12,6 +12,7 @@ import Login from "./scenes/auth/login";
 import Register from "./scenes/auth/register";
 import ForgotPassword from "./scenes/auth/forgot-password";
 import ResetPassword from "./scenes/auth/reset-password";
+import BlogDetail from "./scenes/blog-detail";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
             <Route path='compare-products' element={<CompareProducts />} />
             <Route path='wishlist-products' element={<WishlistProducts />} />
             <Route path='blogs' element={<BlogList />} />
+            <Route path='blog/:id' element={<BlogDetail />} />
             <Route path='contact-us' element={<ContactUs />} />
             <Route path='login' element={<Login />} />
             <Route path='register' element={<Register />} />
