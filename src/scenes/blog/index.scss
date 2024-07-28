@@ -1,0 +1,51 @@
+.blogs-list-banner {
+    position: relative;
+    height: 300px; // Adjust the height as needed
+
+    .blogs-banner-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; // Ensures the image covers the banner area
+        display: block;
+    }
+
+    .banner-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); // Dark overlay with 50% transparency
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        z-index: 1; // Ensure overlay appears above the image
+        padding: 90px;
+    }
+
+    .blogs-listing-content {
+        color: white;
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        .custom-breadcrumb {
+
+            .ant-breadcrumb-link {
+                color: #fff;
+
+                &:hover {
+
+                    color: #fff;
+                    /* Color for hover effect */
+                }
+            }
+
+            .ant-breadcrumb-item-last {
+                color: #6c757d;
+                /* Color for the last item (active) */
+            }
+        }
+    }
+}

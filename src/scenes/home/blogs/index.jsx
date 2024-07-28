@@ -11,10 +11,10 @@ const Blogs = () => {
 
                 <div className='row'>
 
-                    <BlogCard />
-                    <BlogCard />
-                    <BlogCard />
-                    <BlogCard />
+                    <BlogCard columnWidth={3} />
+                    <BlogCard columnWidth={3} />
+                    <BlogCard columnWidth={3} />
+                    <BlogCard columnWidth={3} />
 
                 </div>
             </div>

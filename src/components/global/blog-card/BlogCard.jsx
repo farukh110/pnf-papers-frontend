@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 import './index.scss';
 
-const BlogCard = () => {
+const BlogCard = (props) => {
+
+    const { columnWidth } = props;
+
     return (
-        <div className="col-md-3">
+        <div className={` my-md-4 mt-md-0 col-md-${columnWidth}`}>
+
             <div className="blog-card shadow">
                 <div className="card-image-area">
 

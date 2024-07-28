@@ -6,6 +6,7 @@ import ContactUs from "./scenes/contact";
 import ProductsList from "./scenes/product";
 import BlogList from "./scenes/blog";
 import './assets/scss/app.scss';
+import CompareProducts from "./scenes/compare-products";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
             <Route index element={<Home />} />
             <Route path='about-us' element={<AboutUs />} />
             <Route path='products' element={<ProductsList />} />
+            <Route path='compare-products' element={<CompareProducts />} />
             <Route path='blogs' element={<BlogList />} />
             <Route path='contact-us' element={<ContactUs />} />
           </Route>

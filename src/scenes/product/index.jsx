@@ -7,6 +7,7 @@ import { Checkbox, InputNumber, Select, Tag } from 'antd';
 import ReactStars from 'react-rating-stars-component';
 import { useState } from 'react';
 import ProductCard from './../../components/global/product-card/ProductCard';
+import Color from '../../components/global/controls/colors/Color';
 
 const ProductsList = () => {
 
@@ -201,26 +202,7 @@ const ProductsList = () => {
 
                                                 <div className='d-flex flex-wrap'>
 
-                                                    <ul className='colors ps-0'>
-                                                        <li></li>
-                                                        <li></li>
-                                                        <li></li>
-                                                        <li></li>
-                                                        <li></li>
-                                                        <li></li>
-                                                        <li></li>
-                                                        <li></li>
-                                                        <li></li>
-                                                        <li></li>
-                                                        <li></li>
-                                                        <li></li>
-                                                        <li></li>
-                                                        <li></li>
-                                                        <li></li>
-                                                        <li></li>
-                                                        <li></li>
-                                                        <li></li>
-                                                    </ul>
+                                                    <Color />
 
                                                 </div>
 

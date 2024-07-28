@@ -109,7 +109,7 @@ const Header = () => {
 
                                     <div className='col-md-3 ps-0 pe-0'>
 
-                                        <Link className='text-dark' to='/compare'>
+                                        <Link className='text-dark' to='/compare-products'>
 
                                             <div className='icon-content'>
 
@@ -211,6 +211,7 @@ const Header = () => {
                                         <li> <NavLink to='/'> Home </NavLink> </li>
                                         <li> <NavLink to='/about-us'> About Us </NavLink> </li>
                                         <li> <NavLink to='/products'> Products </NavLink> </li>
+                                        <li> <NavLink to='/blogs'> Blogs </NavLink> </li>
                                         <li> <NavLink to='/contact-us'> Contact Us</NavLink> </li>
                                     </ul>
 
