@@ -124,7 +124,7 @@ const Header = () => {
 
                                     <div className='col-md-3 ps-0 pe-0'>
 
-                                        <Link className='text-dark' to='/wishlist'>
+                                        <Link className='text-dark' to='/wishlist-products'>
 
                                             <div className='icon-content'>
 
