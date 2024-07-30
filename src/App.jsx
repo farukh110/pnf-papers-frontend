@@ -13,6 +13,7 @@ import Register from "./scenes/auth/register";
 import ForgotPassword from "./scenes/auth/forgot-password";
 import ResetPassword from "./scenes/auth/reset-password";
 import BlogDetail from "./scenes/blog-detail";
+import PrivacyPolicy from "./scenes/privacy-policy";
 
 const App = () => {
   return (
@@ -33,6 +34,8 @@ const App = () => {
             <Route path='register' element={<Register />} />
             <Route path='forgot-password' element={<ForgotPassword />} />
             <Route path='reset-password' element={<ResetPassword />} />
+            <Route path='privacy-policy' element={<PrivacyPolicy />} />
+
           </Route>
 
         </Routes>
