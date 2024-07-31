@@ -1,13 +1,12 @@
 import productsListing from '../../assets/images/products/products-lisiting2.webp';
 import './index.scss';
 import { Link } from 'react-router-dom';
-import CustomBreadcrumb from '../../components/global/controls/bread-crumb/CustomBreadcrumb';
-import Meta from '../../components/global/seo/Meta';
 import { Checkbox, InputNumber, Select, Tag } from 'antd';
 import ReactStars from 'react-rating-stars-component';
 import { useState } from 'react';
 import ProductCard from './../../components/global/product-card/ProductCard';
 import Color from '../../components/global/controls/colors/Color';
+import BreadcrumbBanner from '../../components/global/breadcrumb-banner/BreadcrumbBanner';
 
 const ProductsList = () => {
 
@@ -56,36 +55,16 @@ const ProductsList = () => {
 
     return (
         <>
-            <Meta
-                title="Our Products"
-                link="/products"
+            <BreadcrumbBanner
+                metaTitle="Our Products"
+                metaLink="/products"
+                imageSource={productsListing}
+                imageAlt="Product Banner"
+                bannerHeading="Our Products"
+                homeTitle="Home"
+                homeLink="/"
+                pageLink="/products"
             />
-
-            <section className='products-list-banner'>
-
-                <img className='product-banner-img' src={productsListing} alt="Product Banner" />
-
-                <div className='banner-overlay'>
-
-                    <div className='product-listing-content'>
-
-                        <div className='container-xxl'>
-
-                            <h1>Our Products</h1>
-
-                            <CustomBreadcrumb
-                                className='custom-breadcrumb'
-                                initialTitle="Home"
-                                initialLink="/"
-                                title="Products"
-                                link="/products"
-                            />
-
-                        </div>
-                    </div>
-                </div>
-
-            </section>
 
             <section className="products-list my-5">
 

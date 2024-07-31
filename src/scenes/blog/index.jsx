@@ -1,43 +1,23 @@
-import CustomBreadcrumb from '../../components/global/controls/bread-crumb/CustomBreadcrumb';
-import Meta from '../../components/global/seo/Meta';
 import blogsListing from '../../assets/images/blogs/flex-backlit-banner-outdoor_82337.jpg';
 import './index.scss';
 import BlogCard from '../../components/global/blog-card/BlogCard';
+import BreadcrumbBanner from '../../components/global/breadcrumb-banner/BreadcrumbBanner';
 
 const BlogList = () => {
 
     return (
 
         <>
-            <Meta
-                title="Blogs"
-                link="/blogs"
+            <BreadcrumbBanner
+                metaTitle="Blogs"
+                metaLink="/blogs"
+                imageSource={blogsListing}
+                imageAlt="Blogs Banner"
+                bannerHeading="Our Blogs"
+                homeTitle="Home"
+                homeLink="/"
+                pageLink="/blogs"
             />
-            <section className='blogs-list-banner'>
-
-                <img className='blogs-banner-img' src={blogsListing} alt="Blogs Banner" />
-
-                <div className='banner-overlay'>
-
-                    <div className='blogs-listing-content'>
-
-                        <div className='container-xxl'>
-
-                            <h1>Our Blogs</h1>
-
-                            <CustomBreadcrumb
-                                className='custom-breadcrumb'
-                                initialTitle="Home"
-                                initialLink="/"
-                                title="Blogs"
-                                link="/blogs"
-                            />
-
-                        </div>
-                    </div>
-                </div>
-
-            </section>
 
             <section className="blogs-list my-5">
 

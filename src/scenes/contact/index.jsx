@@ -1,12 +1,11 @@
-import CustomBreadcrumb from '../../components/global/controls/bread-crumb/CustomBreadcrumb';
-import Meta from '../../components/global/seo/Meta';
 import contact from '../../assets/images/blogs/flex-backlit-banner-outdoor_82337.jpg';
-import './index.scss';
 import { IoLocationOutline, IoTimeOutline } from 'react-icons/io5';
 import { MdOutlineMailOutline } from 'react-icons/md';
 import { LuPhone } from 'react-icons/lu';
 import { ImWhatsapp } from 'react-icons/im';
 import { Button, Form, Input } from 'antd';
+import BreadcrumbBanner from '../../components/global/breadcrumb-banner/BreadcrumbBanner';
+import './index.scss';
 
 const ContactUs = () => {
 
@@ -19,35 +18,16 @@ const ContactUs = () => {
 
     return (
         <>
-            <Meta
-                title="Contact Us"
-                link="/contact-us"
+            <BreadcrumbBanner
+                metaTitle="Contact Us"
+                metaLink="/contact-us"
+                imageSource={contact}
+                imageAlt="Contact Banner"
+                bannerHeading="Contact Us"
+                homeTitle="Home"
+                homeLink="/"
+                pageLink="/contact-us"
             />
-            <section className='contact-banner'>
-
-                <img className='contact-banner-img' src={contact} alt="Contact Banner" />
-
-                <div className='banner-overlay'>
-
-                    <div className='contact-content'>
-
-                        <div className='container-xxl'>
-
-                            <h1>Contact Us</h1>
-
-                            <CustomBreadcrumb
-                                className='custom-breadcrumb'
-                                initialTitle="Home"
-                                initialLink="/"
-                                title="Contact Us"
-                                link="/contact-us"
-                            />
-
-                        </div>
-                    </div>
-                </div>
-
-            </section>
 
             <section className="contact-us my-5 py-2">
 

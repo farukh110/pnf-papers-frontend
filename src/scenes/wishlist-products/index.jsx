@@ -1,41 +1,21 @@
-import CustomBreadcrumb from '../../components/global/controls/bread-crumb/CustomBreadcrumb';
-import Meta from '../../components/global/seo/Meta';
 import WishlistProductsListing from '../../assets/images/products/products-lisiting2.webp';
 import WishlistProduct from '../../components/global/wishlist-product/WishlistProduct';
 import './index.scss';
+import BreadcrumbBanner from '../../components/global/breadcrumb-banner/BreadcrumbBanner';
 
 const WishlistProducts = () => {
     return (
         <>
-            <Meta
-                title="Wishlist Products"
-                link="/wishlist-products"
+            <BreadcrumbBanner
+                metaTitle="Wishlist Products"
+                metaLink="/wishlist-products"
+                imageSource={WishlistProductsListing}
+                imageAlt="wishlist Banner"
+                bannerHeading="Wishlist Products"
+                homeTitle="Home"
+                homeLink="/"
+                pageLink="/wishlist-products"
             />
-            <section className='wishlist-products-banner'>
-
-                <img className='wishlist-products-banner-img' src={WishlistProductsListing} alt="wishlist Banner" />
-
-                <div className='banner-overlay'>
-
-                    <div className='wishlist-products-content'>
-
-                        <div className='container-xxl'>
-
-                            <h1>Wishlist Products</h1>
-
-                            <CustomBreadcrumb
-                                className='custom-breadcrumb'
-                                initialTitle="Home"
-                                initialLink="/"
-                                title="wishlist"
-                                link="/wishlist-products"
-                            />
-
-                        </div>
-                    </div>
-                </div>
-
-            </section>
 
             <section className="wishlist-products-list my-5">
 
