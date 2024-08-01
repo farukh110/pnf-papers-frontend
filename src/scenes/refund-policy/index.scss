@@ -1,0 +1,19 @@
+.refund-main-content {
+
+    .privacy-points {
+
+        list-style-type: none;
+        padding: 0;
+
+        .pri-points {
+
+            display: flex;
+            align-items: flex-start; // Align items at the top
+            margin-bottom: 1rem; // Space between list items
+
+            i {
+                margin-right: 0.5rem;
+            }
+        }
+    }
+}

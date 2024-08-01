@@ -157,16 +157,16 @@ const Footer = () => {
                                     <span className="m-gap-line" />
                                     <Link
                                         className="ms-1"
-                                        to="/declaration"
+                                        to="/privacy-policy"
                                     >
-                                        Declaration
+                                        Privacy Policy
                                     </Link>
                                     <span className="m-gap-line" />
                                     <Link
                                         className="ms-1"
-                                        to="/privacy-policy"
+                                        to="/refund-policy"
                                     >
-                                        Privacy Policy
+                                        Refund Policy
                                     </Link>
                                 </div>
                             </div>
