@@ -150,9 +150,9 @@ const Footer = () => {
                                     <span className="m-gap-line" />
                                     <Link
                                         className="ms-1"
-                                        to="/user-agreement"
+                                        to="/terms-&-conditions"
                                     >
-                                        User Agreement
+                                        Terms & Conditions
                                     </Link>
                                     <span className="m-gap-line" />
                                     <Link

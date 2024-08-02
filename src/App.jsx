@@ -15,6 +15,7 @@ import ResetPassword from "./scenes/auth/reset-password";
 import BlogDetail from "./scenes/blog-detail";
 import PrivacyPolicy from "./scenes/privacy-policy";
 import RefundPolicy from "./scenes/refund-policy";
+import TermsAndConditions from "./scenes/terms-&-conditions";
 
 const App = () => {
   return (
@@ -37,6 +38,7 @@ const App = () => {
             <Route path='reset-password' element={<ResetPassword />} />
             <Route path='privacy-policy' element={<PrivacyPolicy />} />
             <Route path='refund-policy' element={<RefundPolicy />} />
+            <Route path='terms-&-conditions' element={<TermsAndConditions />} />
 
           </Route>
 
