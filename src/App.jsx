@@ -16,6 +16,7 @@ import BlogDetail from "./scenes/blog-detail";
 import PrivacyPolicy from "./scenes/privacy-policy";
 import RefundPolicy from "./scenes/refund-policy";
 import TermsAndConditions from "./scenes/terms-&-conditions";
+import ProductDetail from "./scenes/product-details";
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
             <Route path='privacy-policy' element={<PrivacyPolicy />} />
             <Route path='refund-policy' element={<RefundPolicy />} />
             <Route path='terms-&-conditions' element={<TermsAndConditions />} />
+            <Route path='product/:id' element={<ProductDetail />} />
 
           </Route>
 

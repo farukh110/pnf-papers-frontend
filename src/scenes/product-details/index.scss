@@ -1,0 +1,230 @@
+.product-details {
+
+    .product-details-container {
+
+        border: 1px solid #ccc;
+        border-radius: 2px;
+
+        .product-detail-main {
+
+            border: 1px solid #ccc;
+            background: #fff;
+            border-radius: 2px;
+
+            img {
+
+                width: 100% !important;
+                height: 500px !important;
+                object-fit: cover;
+            }
+        }
+
+        .group-images {
+
+            .group-box {
+
+                border: 1px solid #ccc;
+                border-radius: 2px;
+                width: 100%;
+                height: 180px;
+                cursor: pointer;
+
+                img {
+
+                    border-radius: 2px;
+                    width: 100%;
+                    height: 180px;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        .product-detail-right {
+
+            .product-detail-title {
+
+                font-size: 22px;
+                font-weight: 700;
+            }
+
+            .product-detail-price {
+
+                font-size: 28px;
+                font-weight: 600;
+
+                .price-symbol {
+
+                    color: #70737C;
+                }
+            }
+
+            .detail-area {
+
+                .detail-area-title {
+
+                    font-weight: 700;
+                }
+
+                .stock-tag {
+
+                    font-size: 16px;
+                    color: #fff;
+                    border: unset;
+                    background-color: #70737C;
+                    border-radius: 50px;
+                }
+            }
+
+            .color-collection {
+
+                ul {
+
+                    list-style: none;
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                    padding-left: 0px !important;
+                    margin-bottom: 0px;
+
+                    li {
+                        width: 20px;
+                        height: 20px;
+                        background: red;
+                        border-radius: 50%;
+                    }
+                }
+            }
+
+            button {
+
+                border-radius: 50px;
+            }
+
+            .btn-compare {
+
+                border: 1px solid #70737C;
+                background: transparent !important;
+                color: #70737C;
+                padding-top: 0px;
+                padding-bottom: 0px;
+            }
+
+            .btn-wishlist {
+                border: 1px solid #70737C;
+                background: transparent !important;
+                color: #70737C;
+                padding-top: 0px;
+                padding-bottom: 0px;
+            }
+
+            .btn-cart {
+
+                background: #0C1D36;
+                border-radius: 50px;
+                font-size: 16px;
+                font-weight: 600;
+                padding-bottom: 6px;
+                height: 40px;
+
+                &:hover {
+
+                    background: #70737C;
+                }
+            }
+
+            .btn-buy {
+
+                background: #70737C;
+                border-radius: 50px;
+                font-size: 16px;
+                font-weight: 600;
+                padding-bottom: 6px;
+                height: 40px;
+
+                &:hover {
+
+                    background: #0C1D36;
+                }
+            }
+        }
+    }
+}
+
+.description-container {
+
+    .description-shadow {
+
+        border: 1px solid #ccc;
+        border-radius: 2px;
+
+        h3 {
+
+            font-size: 22px;
+        }
+
+        p {
+
+            font-size: 15px;
+            color: #0C1D36;
+        }
+    }
+
+}
+
+.reviews-container {
+
+    .reviews {
+
+        border: 1px solid #ccc;
+        border-radius: 2px;
+
+        h3 {
+            font-size: 22px;
+        }
+
+        .reviews-text {
+
+            margin-bottom: 0px !important;
+        }
+    }
+
+    .review-form {
+
+        .review-title {
+
+            font-size: 16px;
+        }
+
+        .ant-form-item {
+
+            margin-bottom: 2px;
+        }
+
+        .btn-submit {
+
+            background: #70737C;
+
+            &:hover {
+
+                background: #0C1D36;
+            }
+
+        }
+    }
+
+    .reviews-list {
+
+        .customer-review {
+
+            h5 {
+
+                font-size: 16x;
+            }
+
+            p {
+                font-size: 14px;
+                color: #70737C;
+            }
+        }
+    }
+}
