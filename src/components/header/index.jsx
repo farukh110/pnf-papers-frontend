@@ -156,7 +156,7 @@ const Header = () => {
 
                                     <div className='col-md-3 ps-0 pe-0'>
 
-                                        <Link className='text-dark d-flex align-items-center'>
+                                        <Link to='/cart' className='text-dark d-flex align-items-center'>
 
                                             <BsCart className='custom-icon' />
 

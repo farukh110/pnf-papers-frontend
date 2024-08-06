@@ -17,6 +17,7 @@ import PrivacyPolicy from "./scenes/privacy-policy";
 import RefundPolicy from "./scenes/refund-policy";
 import TermsAndConditions from "./scenes/terms-&-conditions";
 import ProductDetail from "./scenes/product-details";
+import Cart from "./scenes/cart";
 
 const App = () => {
   return (
@@ -28,6 +29,8 @@ const App = () => {
             <Route index element={<Home />} />
             <Route path='about-us' element={<AboutUs />} />
             <Route path='products' element={<ProductsList />} />
+            <Route path='product/:id' element={<ProductDetail />} />
+            <Route path='cart' element={<Cart />} />
             <Route path='compare-products' element={<CompareProducts />} />
             <Route path='wishlist-products' element={<WishlistProducts />} />
             <Route path='blogs' element={<BlogList />} />
@@ -40,7 +43,6 @@ const App = () => {
             <Route path='privacy-policy' element={<PrivacyPolicy />} />
             <Route path='refund-policy' element={<RefundPolicy />} />
             <Route path='terms-&-conditions' element={<TermsAndConditions />} />
-            <Route path='product/:id' element={<ProductDetail />} />
 
           </Route>
 
