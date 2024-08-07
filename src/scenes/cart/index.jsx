@@ -4,6 +4,7 @@ import product1 from "../../assets/images/products/products-lisiting2.webp";
 import './index.scss';
 import { Button, InputNumber, Tooltip } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
 
@@ -133,12 +134,12 @@ const Cart = () => {
                                         </a>
                                     </div>
                                     <div className="col-lg-5 col-md-5 col-sm-5 ps-0 col-12">
-                                        <a
-                                            href="#"
+                                        <Link
+                                            to="/checkout"
                                             className="btn-checkout w-100 mt-lg-0 mt-md-0 mt-sm-0 mt-2"
                                         >
                                             check out
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

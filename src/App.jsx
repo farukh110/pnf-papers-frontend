@@ -18,6 +18,7 @@ import RefundPolicy from "./scenes/refund-policy";
 import TermsAndConditions from "./scenes/terms-&-conditions";
 import ProductDetail from "./scenes/product-details";
 import Cart from "./scenes/cart";
+import CheckOut from "./scenes/checkout/inex";
 
 const App = () => {
   return (
@@ -43,6 +44,7 @@ const App = () => {
             <Route path='privacy-policy' element={<PrivacyPolicy />} />
             <Route path='refund-policy' element={<RefundPolicy />} />
             <Route path='terms-&-conditions' element={<TermsAndConditions />} />
+            <Route path='checkout' element={<CheckOut />} />
 
           </Route>
 
