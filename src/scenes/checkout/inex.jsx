@@ -1,8 +1,17 @@
 import Meta from '../../components/global/seo/Meta';
-import { Breadcrumb } from 'antd';
+import { Breadcrumb, Button, Form, Input, Select } from 'antd';
 import './index.scss';
+import { Link } from 'react-router-dom';
 
 const CheckOut = () => {
+
+    const onFinish = (values) => {
+        console.log('Success:', values);
+    };
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
+
     return (
         <>
             <Meta
@@ -25,13 +34,16 @@ const CheckOut = () => {
                                 <Breadcrumb
                                     items={[
                                         {
-                                            title: 'Home',
+                                            title: <Link to='/cart'> Cart </Link>,
                                         },
                                         {
-                                            title: <a href="">Application Center</a>,
+                                            title: 'Information',
                                         },
                                         {
-                                            title: 'Checkout',
+                                            title: 'Shipping',
+                                        },
+                                        {
+                                            title: 'Payment',
                                         },
                                     ]}
                                 />
@@ -41,6 +53,244 @@ const CheckOut = () => {
                                 <p className='buyer-details'>
                                     Farukh Sajjad (Farukhsajjad110@gmail.com)
                                 </p>
+
+                                <Form
+                                    initialValues={{
+                                        remember: true,
+                                    }}
+                                    onFinish={onFinish}
+                                    onFinishFailed={onFinishFailed}
+                                    autoComplete="off"
+                                >
+
+                                    <div className='row'>
+
+                                        <div className='col-md-4'>
+
+                                            <Form.Item
+                                                name="country"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message: 'Country is required',
+                                                    },
+                                                ]}
+                                            >
+
+                                                <Select
+                                                    showSearch
+                                                    className='w-100'
+                                                    placeholder="Select your Country"
+                                                    filterOption={(input, option) =>
+                                                        (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                                                    }
+                                                    options={[
+                                                        {
+                                                            value: '1',
+                                                            label: 'Jack',
+                                                        },
+                                                        {
+                                                            value: '2',
+                                                            label: 'Lucy',
+                                                        },
+                                                        {
+                                                            value: '3',
+                                                            label: 'Tom',
+                                                        },
+                                                    ]}
+                                                />
+
+                                            </Form.Item>
+
+                                        </div>
+
+                                        <div className='col-md-4'>
+
+                                            <Form.Item
+                                                name="first_name"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message: 'First name is required',
+                                                    },
+                                                ]}
+                                            >
+                                                <Input
+                                                    placeholder='Please enter your first name'
+                                                />
+                                            </Form.Item>
+
+                                        </div>
+
+                                        <div className='col-md-4'>
+
+                                            <Form.Item
+                                                name="last_name"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message: 'Last name is required',
+                                                    },
+                                                ]}
+                                            >
+                                                <Input
+                                                    placeholder='Please enter your last name'
+                                                />
+                                            </Form.Item>
+
+                                        </div>
+
+                                        <div className='col-md-12'>
+
+                                            <Form.Item
+                                                name="address"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message: 'Address is required',
+                                                    },
+                                                ]}
+                                            >
+                                                <Input
+                                                    placeholder='Please enter your address'
+                                                />
+                                            </Form.Item>
+
+                                        </div>
+
+                                        <div className='col-md-6'>
+
+                                            <Form.Item
+                                                name="residental"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message: 'Home, Office, Apartment, flat is required',
+                                                    },
+                                                ]}
+                                            >
+                                                <Input
+                                                    placeholder='Please enter your residental area'
+                                                />
+                                            </Form.Item>
+
+                                        </div>
+
+                                        <div className='col-md-6'>
+
+                                            <Form.Item
+                                                name="city"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message: 'City is required',
+                                                    },
+                                                ]}
+                                            >
+
+                                                <Select
+                                                    showSearch
+                                                    className='w-100'
+                                                    placeholder="Select your City"
+                                                    filterOption={(input, option) =>
+                                                        (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                                                    }
+                                                    options={[
+                                                        {
+                                                            value: '1',
+                                                            label: 'Jack',
+                                                        },
+                                                        {
+                                                            value: '2',
+                                                            label: 'Lucy',
+                                                        },
+                                                        {
+                                                            value: '3',
+                                                            label: 'Tom',
+                                                        },
+                                                    ]}
+                                                />
+
+                                            </Form.Item>
+
+                                        </div>
+
+                                        <div className='col-md-6'>
+
+                                            <Form.Item
+                                                name="state"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message: 'State is required',
+                                                    },
+                                                ]}
+                                            >
+
+                                                <Select
+                                                    showSearch
+                                                    className='w-100'
+                                                    placeholder="Select your State"
+                                                    filterOption={(input, option) =>
+                                                        (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                                                    }
+                                                    options={[
+                                                        {
+                                                            value: '1',
+                                                            label: 'Jack',
+                                                        },
+                                                        {
+                                                            value: '2',
+                                                            label: 'Lucy',
+                                                        },
+                                                        {
+                                                            value: '3',
+                                                            label: 'Tom',
+                                                        },
+                                                    ]}
+                                                />
+
+                                            </Form.Item>
+
+                                        </div>
+
+                                        <div className='col-md-6'>
+
+                                            <Form.Item
+                                                name="zip_code"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message: 'Zip Code/Postal Code is required',
+                                                    },
+                                                ]}
+                                            >
+                                                <Input
+                                                    placeholder='Please enter your zip code/ postal zip'
+                                                />
+                                            </Form.Item>
+
+                                        </div>
+
+                                        <div className='col-md-6 mt-md-2'>
+                                            <Form.Item>
+                                                <Button type="primary" className='btn-submit' htmlType="button">
+                                                    Back to Cart
+                                                </Button>
+                                            </Form.Item>
+                                        </div>
+
+                                        <div className='col-md-6 mt-md-2'>
+                                            <Form.Item>
+                                                <Button type="primary" className='btn-submit' htmlType="submit">
+                                                    Continue to Shipping
+                                                </Button>
+                                            </Form.Item>
+                                        </div>
+
+                                    </div>
+
+                                </Form>
 
                             </div>
 
