@@ -301,74 +301,103 @@ const CheckOut = () => {
 
                             <div className='row checkout-item justify-content-center align-items-center mt-md-3'>
 
-                                <div>
-                                </div>
+                                <div className='col-md-10'>
 
-                                <div className='col-md-2'>
+                                    <div className='row mt-md-3'>
 
-                                    <Badge count={5}>
-                                        <img className='img-fluid' src={productImg} />
-                                    </Badge>
+                                        <div className='col-md-3'>
 
-                                </div>
+                                            <Badge count={5}>
+                                                <img className='img-fluid' src={productImg} />
+                                            </Badge>
 
-                                <div className='col-md-6'>
+                                        </div>
 
-                                    <div className='checkout-content'>
+                                        <div className='col-md-6'>
 
-                                        <p className='product-title mb-0'> Low Price Supplier Frontlit Backlit Flex </p>
+                                            <div className='checkout-content'>
+
+                                                <p className='product-title mb-0'> Low Price Supplier Frontlit Backlit Flex </p>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div className='col-md-2'>
+
+                                            <p className='checkout-price mb-0'> 2000 </p>
+                                        </div>
+
+                                    </div>
+
+                                    <div className='row mt-md-3'>
+
+                                        <div className='col-md-3'>
+
+                                            <Badge count={5}>
+                                                <img className='img-fluid' src={productImg} />
+                                            </Badge>
+
+                                        </div>
+
+                                        <div className='col-md-6'>
+
+                                            <div className='checkout-content'>
+
+                                                <p className='product-title mb-0'> Low Price Supplier Frontlit Backlit Flex </p>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div className='col-md-2'>
+
+                                            <p className='checkout-price mb-0'> 2000 </p>
+                                        </div>
 
                                     </div>
 
                                 </div>
 
-                                <div className='col-md-2'>
+                                <div className='col-md-10'>
 
-                                    <p className='checkout-price mb-0'> 2000 </p>
-                                </div>
+                                    <div className='checkout-total-area mt-md-4'>
 
-                            </div>
+                                        <div className='row'>
 
-                            <div className='row checkout-item justify-content-center align-items-center mt-md-3'>
+                                            <div className='col-md-6'>
 
-                                <div className='col-md-2'>
+                                                <p className='sub-total-text'> Subtotal </p>
 
-                                    <Badge count={5}>
-                                        <img className='img-fluid' src={productImg} />
-                                    </Badge>
+                                            </div>
 
-                                </div>
+                                            <div className='col-md-6'>
 
-                                <div className='col-md-6'>
+                                                <p className='sub-total text-center'> Rs 6000 </p>
 
-                                    <div className='checkout-content'>
+                                            </div>
 
-                                        <p className='product-title mb-0'> Low Price Supplier Frontlit Backlit Flex </p>
+                                        </div>
 
-                                    </div>
+                                        <div className='row'>
 
-                                </div>
+                                            <div className='col-md-6'>
 
-                                <div className='col-md-2'>
+                                                <p className='sub-shipping-text'> Sub Shipping </p>
 
-                                    <p className='checkout-price mb-0'> 2000 </p>
-                                </div>
+                                            </div>
 
-                            </div>
+                                            <div className='col-md-6'>
 
-                            <div className='checkout-total-area mt-md-4'>
+                                                <p className='sub-shipping-total text-center'> Rs 6000 </p>
 
-                                <div className='row'>
+                                            </div>
 
-                                    <div className='col-md-6'>
-
-                                        <p className='sub-total'> Rs 6000 </p>
+                                        </div>
 
                                     </div>
 
-                                    <div className='col-md-6'>
 
-                                    </div>
                                 </div>
 
                             </div>
