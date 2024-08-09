@@ -1,7 +1,8 @@
 import Meta from '../../components/global/seo/Meta';
-import { Breadcrumb, Button, Form, Input, Select } from 'antd';
+import { Badge, Breadcrumb, Button, Form, Input, Select } from 'antd';
 import './index.scss';
 import { Link } from 'react-router-dom';
+import productImg from '../../assets/images/products/products-lisiting.webp';
 
 const CheckOut = () => {
 
@@ -23,7 +24,7 @@ const CheckOut = () => {
 
                 <div className='container-xxl'>
 
-                    <div className='row'>
+                    <div className='row justify-content-center'>
 
                         <div className='col-md-6'>
 
@@ -296,7 +297,81 @@ const CheckOut = () => {
 
                         </div>
 
-                        <div className='col-md-6'>
+                        <div className='col-md-5 checkout-right-area'>
+
+                            <div className='row checkout-item justify-content-center align-items-center mt-md-3'>
+
+                                <div>
+                                </div>
+
+                                <div className='col-md-2'>
+
+                                    <Badge count={5}>
+                                        <img className='img-fluid' src={productImg} />
+                                    </Badge>
+
+                                </div>
+
+                                <div className='col-md-6'>
+
+                                    <div className='checkout-content'>
+
+                                        <p className='product-title mb-0'> Low Price Supplier Frontlit Backlit Flex </p>
+
+                                    </div>
+
+                                </div>
+
+                                <div className='col-md-2'>
+
+                                    <p className='checkout-price mb-0'> 2000 </p>
+                                </div>
+
+                            </div>
+
+                            <div className='row checkout-item justify-content-center align-items-center mt-md-3'>
+
+                                <div className='col-md-2'>
+
+                                    <Badge count={5}>
+                                        <img className='img-fluid' src={productImg} />
+                                    </Badge>
+
+                                </div>
+
+                                <div className='col-md-6'>
+
+                                    <div className='checkout-content'>
+
+                                        <p className='product-title mb-0'> Low Price Supplier Frontlit Backlit Flex </p>
+
+                                    </div>
+
+                                </div>
+
+                                <div className='col-md-2'>
+
+                                    <p className='checkout-price mb-0'> 2000 </p>
+                                </div>
+
+                            </div>
+
+                            <div className='checkout-total-area mt-md-4'>
+
+                                <div className='row'>
+
+                                    <div className='col-md-6'>
+
+                                        <p className='sub-total'> Rs 6000 </p>
+
+                                    </div>
+
+                                    <div className='col-md-6'>
+
+                                    </div>
+                                </div>
+
+                            </div>
 
                         </div>
 
