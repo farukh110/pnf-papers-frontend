@@ -74,7 +74,7 @@ const Footer = () => {
 
                     <div className='row gray-border py-3'>
 
-                        <div className='col-md-5'>
+                        <div className='col-md-5 col-12'>
 
                             <div className="footer-social">
                                 <span className="social-title">Follow Us:</span>

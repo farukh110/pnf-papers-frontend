@@ -65,3 +65,26 @@ footer {
         }
     }
 }
+
+@media (max-width: 480px) {
+
+    footer {
+
+        .footer-simple-links-group {
+            text-align: center;
+            margin-top: 10px;
+        }
+    }
+
+    .footer-social {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        flex-wrap: nowrap;
+        align-items: center;
+
+        a {
+            margin-left: 0px !important;
+        }
+    }
+}
