@@ -11,7 +11,7 @@ const SelectedProducts = () => {
 
                     <div className='row'>
 
-                        <div className='col-md-2'>
+                        <div className='col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6'>
 
                             <div className='product-item text-center'>
 
@@ -27,7 +27,7 @@ const SelectedProducts = () => {
 
                         </div>
 
-                        <div className='col-md-2'>
+                        <div className='col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6'>
 
                             <div className='product-item text-center'>
 
@@ -43,7 +43,7 @@ const SelectedProducts = () => {
 
                         </div>
 
-                        <div className='col-md-2'>
+                        <div className='col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6'>
 
                             <div className='product-item text-center'>
 
@@ -59,7 +59,7 @@ const SelectedProducts = () => {
 
                         </div>
 
-                        <div className='col-md-2'>
+                        <div className='col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6'>
 
                             <div className='product-item text-center'>
 
@@ -74,7 +74,7 @@ const SelectedProducts = () => {
                             </div>
 
                         </div>
-                        <div className='col-md-2'>
+                        <div className='col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6'>
 
                             <div className='product-item text-center'>
 
@@ -90,7 +90,7 @@ const SelectedProducts = () => {
 
                         </div>
 
-                        <div className='col-md-2'>
+                        <div className='col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6'>
 
                             <div className='product-item text-center'>
 
@@ -106,7 +106,7 @@ const SelectedProducts = () => {
 
                         </div>
 
-                        <div className='col-md-2'>
+                        <div className='col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6'>
 
                             <div className='product-item text-center'>
 
@@ -122,7 +122,7 @@ const SelectedProducts = () => {
 
                         </div>
 
-                        <div className='col-md-2'>
+                        <div className='col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6'>
 
                             <div className='product-item text-center'>
 
@@ -138,7 +138,7 @@ const SelectedProducts = () => {
 
                         </div>
 
-                        <div className='col-md-2'>
+                        <div className='col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6'>
 
                             <div className='product-item text-center'>
 
@@ -154,7 +154,7 @@ const SelectedProducts = () => {
 
                         </div>
 
-                        <div className='col-md-2'>
+                        <div className='col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6'>
 
                             <div className='product-item text-center'>
 
@@ -170,7 +170,7 @@ const SelectedProducts = () => {
 
                         </div>
 
-                        <div className='col-md-2'>
+                        <div className='col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6'>
 
                             <div className='product-item text-center'>
 
@@ -186,7 +186,7 @@ const SelectedProducts = () => {
 
                         </div>
 
-                        <div className='col-md-2'>
+                        <div className='col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6'>
 
                             <div className='product-item text-center'>
 
