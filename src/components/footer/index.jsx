@@ -11,7 +11,7 @@ const Footer = () => {
 
                     <div className='row'>
 
-                        <div className='col-md-3'>
+                        <div className='col-lg-3 col-md-3 col-sm-3 col-12'>
 
                             <h5> Discover Products & Suppliers </h5>
 
@@ -27,7 +27,7 @@ const Footer = () => {
 
                         </div>
 
-                        <div className='col-md-3'>
+                        <div className='col-lg-3 col-md-3 col-sm-3 col-12'>
 
                             <h5> About Us </h5>
 
@@ -42,7 +42,7 @@ const Footer = () => {
 
                         </div>
 
-                        <div className='col-md-3'>
+                        <div className='col-lg-3 col-md-3 col-sm-3 col-12'>
 
                             <h5> Help </h5>
 
@@ -56,7 +56,7 @@ const Footer = () => {
 
                         </div>
 
-                        <div className='col-md-3'>
+                        <div className='col-lg-3 col-md-3 col-sm-3 col-12'>
 
                             <h5> Contact </h5>
 

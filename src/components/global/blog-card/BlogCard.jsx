@@ -5,13 +5,15 @@ const BlogCard = (props) => {
 
     const { columnWidth } = props;
 
+    const { lg, md, sm, col } = columnWidth;
+
     return (
-        <div className={` my-md-4 mt-md-0 col-md-${columnWidth}`}>
+        <div className={` my-md-4 my-3 mt-md-0 col-lg-${lg} col-md-${md} col-sm-${sm} col-sm-${col}`}>
 
             <div className="blog-card shadow">
                 <div className="card-image-area">
 
-                    <img className="img-fluid" src="https://www.micstatic.com/mic-search/img/home-2019/solutions-pic1.jpg?_v=1720717196527" />
+                    <img className="img-fluid w-100" src="https://www.micstatic.com/mic-search/img/home-2019/solutions-pic1.jpg?_v=1720717196527" />
 
                 </div>
                 <div className="blog-content p-3">
