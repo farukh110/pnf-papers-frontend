@@ -18,7 +18,7 @@ const PopularProducts = () => {
 
                             <button className='btn btn-danger btn-product'> source Now </button>
 
-                            <img className='img-fluid mt-md-4' src="https://i.trade-cloud.com.cn/upload/7452/frontlit-banner10-116659.jpg" />
+                            <img className='img-fluid mt-md-4 mt-4' src="https://i.trade-cloud.com.cn/upload/7452/frontlit-banner10-116659.jpg" />
 
                         </div>
 

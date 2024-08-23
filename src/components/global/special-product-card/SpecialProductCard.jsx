@@ -56,26 +56,18 @@ const SpecialProductCard = () => {
 
                     <div className="row">
 
-                        <div className="col-md-3">
+                        <div className="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
 
                             <strong> 5 </strong>
                             <p> days </p>
 
                         </div>
 
-                        <div className="col-md-9">
+                        <div className="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
 
-                            <div className="row">
+                            <div className="row justify-content-center">
 
-                                <div className="col-md-4">
-
-                                    <div className="custom-badge">
-                                        1
-                                    </div>
-
-                                </div>
-
-                                <div className="col-md-4">
+                                <div className="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
 
                                     <div className="custom-badge">
                                         1
@@ -83,7 +75,15 @@ const SpecialProductCard = () => {
 
                                 </div>
 
-                                <div className="col-md-4">
+                                <div className="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+
+                                    <div className="custom-badge">
+                                        1
+                                    </div>
+
+                                </div>
+
+                                <div className="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
 
                                     <div className="custom-badge">
                                         1

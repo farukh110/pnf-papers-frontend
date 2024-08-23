@@ -109,3 +109,19 @@
         }
     }
 }
+
+@media (max-width: 480px) {
+
+    .product-item {
+
+        .product-details {
+            .custom-badge {
+
+                height: 56px;
+                padding: 11px;
+            }
+        }
+
+    }
+
+}

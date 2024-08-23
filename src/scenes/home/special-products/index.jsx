@@ -18,7 +18,7 @@ const SpecialProducts = () => {
 
                             <button className='btn btn-danger btn-product'> source Now </button>
 
-                            <img className='img-fluid mt-md-5' src={p1} />
+                            <img className='img-fluid mt-md-5 mt-4' src={p1} />
 
                         </div>
 
