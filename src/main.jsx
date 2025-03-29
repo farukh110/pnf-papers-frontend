@@ -10,11 +10,15 @@ import 'primeicons/primeicons.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'antd/dist/reset.css';
 import './index.css';
+import { store } from './redux/store';
+import { Provider } from 'react-redux';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <PrimeReactProvider>
-      <App />
-    </PrimeReactProvider>
+    <Provider store={store}>
+      <PrimeReactProvider>
+        <App />
+      </PrimeReactProvider>
+    </Provider>
   </React.StrictMode>,
 )
