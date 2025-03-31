@@ -19,9 +19,10 @@ export const registerUser = createAsyncThunk(REGISTER_USER, async (user, thunkAP
 
     } catch (error) {
 
-        return thunkAPI.rejectWithValue(error);
-    }
+        const message = error.response?.data?.message || error.message || 'Something went wrong';
+        return thunkAPI.rejectWithValue(message);
 
+    }
 });
 
 export const authSlice = createSlice({
@@ -39,7 +40,7 @@ export const authSlice = createSlice({
                 state.isLoading = false;
                 state.isError = false;
                 state.isSuccess = true;
-                state.user = action.payload;
+                state.createdUser = action.payload;
             })
             .addCase(registerUser.rejected, (state, action) => {
                 state.isLoading = false;
