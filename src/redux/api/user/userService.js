@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BACKEND } from "../../utilities/base_url";
 
-const getTokenFromLocalStorage = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null;
+const getTokenFromLocalStorage = localStorage.getItem("customer") ? JSON.parse(localStorage.getItem("customer")) : null;
 
 console.log('getTokenFromLocalStorage: ', getTokenFromLocalStorage);
 
@@ -33,7 +33,7 @@ const loginUser = async (userData) => {
         const response = await axios.post(`${BACKEND}/user/login`, userData);
 
         if (response.data) {
-            localStorage.setItem("user", JSON.stringify(response.data));
+            localStorage.setItem("customer", JSON.stringify(response.data));
         }
 
         return response.data;

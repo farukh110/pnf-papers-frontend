@@ -5,12 +5,23 @@ import { BsCartPlus } from "react-icons/bs";
 import { HiOutlineEye } from "react-icons/hi";
 import { GoGitCompare } from "react-icons/go";
 import { FaRegHeart } from "react-icons/fa6";
+import { useDispatch } from "react-redux";
+import { addToWishlist } from "../../../redux/api/product/productSlice";
 
 const ProductCard = (props) => {
+
+    const dispatch = useDispatch();
+
     const { productsGrid, data } = props;
     let location = useLocation();
 
     console.log('data: ', data);
+
+    const addToWishlistItem = (id) => {
+
+        console.log('wishlist id:', id);
+        dispatch(addToWishlist(id));
+    };
 
     return (
         <>
@@ -20,10 +31,10 @@ const ProductCard = (props) => {
 
                     <div className='product-item position-relative text-center'>
 
-                        <div className="wishlist position-absolute">
-                            <Link to='/wishlist'>
-                                <FaRegHeart className="wishlist-icon" />
-                            </Link>
+                        <div className="wishlist position-absolute" onClick={() => addToWishlistItem(item?._id)}>
+                            {/* <Link to='/wishlist'> */}
+                            <FaRegHeart className="wishlist-icon" />
+                            {/* </Link> */}
                         </div>
 
                         <div className="product-img">

@@ -21,9 +21,22 @@ const getProduct = async (productId) => {
     return response.data;
 }
 
+const addToWishlist = async (productId) => {
+
+    try {
+
+        const response = await axios.put(`${BACKEND}/product/wishlist`, { productId }, config);
+        return response.data;
+
+    } catch (error) {
+        throw new Error('Error: ', error);
+    }
+}
+
 const productService = {
     getAllProducts,
-    getProduct
+    getProduct,
+    addToWishlist
 };
 
 export default productService;

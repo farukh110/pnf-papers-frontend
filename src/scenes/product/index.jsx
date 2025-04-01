@@ -16,7 +16,7 @@ const ProductsList = () => {
 
     const dispatch = useDispatch();
 
-    const { isSuccess, isError, isLoading, product } = useSelector(state => state.product);
+    const { isSuccess, isError, isLoading, product } = useSelector(state => state?.product);
 
     console.log('product data: ', product);
 
@@ -425,7 +425,7 @@ const ProductsList = () => {
 
                                 <div className='row'>
 
-                                    <ProductCard data={product} productsGrid={productsGrid} />
+                                    <ProductCard data={product ? product : []} productsGrid={productsGrid} />
 
                                     <ProductCard productsGrid={productsGrid} />
 
