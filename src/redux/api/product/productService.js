@@ -21,11 +21,11 @@ const getProduct = async (productId) => {
     return response.data;
 }
 
-const addToWishlist = async (productId) => {
+const addToWishlist = async (prodId) => {
 
     try {
 
-        const response = await axios.put(`${BACKEND}/product/wishlist`, { productId }, config);
+        const response = await axios.put(`${BACKEND}/product/wishlist`, { prodId }, config);
         return response.data;
 
     } catch (error) {
