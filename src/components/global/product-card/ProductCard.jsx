@@ -4,90 +4,77 @@ import './index.scss';
 import { BsCartPlus } from "react-icons/bs";
 import { HiOutlineEye } from "react-icons/hi";
 import { GoGitCompare } from "react-icons/go";
-import { CiHeart } from "react-icons/ci";
 import { FaRegHeart } from "react-icons/fa6";
 
 const ProductCard = (props) => {
-
-    const { productsGrid } = props;
-
+    const { productsGrid, data } = props;
     let location = useLocation();
 
-    console.log('location: ', location);
+    console.log('data: ', data);
 
     return (
-        <div className={`${location.pathname == "/products" ? `col-md-${productsGrid}` : `col-md-3`}`}>
+        <>
+            {data?.length > 0 && data?.map((item) => (
 
-            <div className='product-item position-relative text-center'>
+                <div key={item?._id} className={`${location.pathname === "/products" ? `col-md-${productsGrid}` : `col-md-3`}`}>
 
-                <div className="wishlist position-absolute">
+                    <div className='product-item position-relative text-center'>
 
-                    <Link to='/wishlist'>
-                        <FaRegHeart className="wishlist-icon" />
-                    </Link>
+                        <div className="wishlist position-absolute">
+                            <Link to='/wishlist'>
+                                <FaRegHeart className="wishlist-icon" />
+                            </Link>
+                        </div>
 
-                </div>
+                        <div className="product-img">
+                            <img
+                                className='img-fluid first-img'
+                                src={item?.images[0]?.url}
+                                alt='Construction Products'
+                            />
+                            <img
+                                className='img-fluid last-img'
+                                src={item?.images[0]?.url}
+                                alt='Construction Products'
+                            />
+                        </div>
 
-                <div className="product-img">
-                    <img
-                        className='img-fluid first-img'
-                        src='https://pic.made-in-china.com/8f4j00GNEUvroRYVhd/Construction-Products1720170543000.jpg'
-                        alt='Construction Products'
-                    />
+                        <div className="product-details">
+                            <h5 className='brand mt-1'> {item?.brand} </h5>
+                            <h4 className='product-title'>{item?.title} </h4>
 
-                    <img
-                        className='img-fluid last-img'
-                        src='https://image.made-in-china.com/258f1j00NRtYFSQfuTig/Sink.webp'
-                        alt='Construction Products'
-                    />
+                            <ReactStars
+                                count={5}
+                                size={24}
+                                value={Number(item?.totalRating)}  // Fixed: should be a number, not a string
+                                edit={false}
+                                activeColor="#ffd700"
+                            />
 
-                </div>
+                            <p dangerouslySetInnerHTML={{ __html: item?.description }} className={`description ${productsGrid === 12 ? "d-block" : "d-none"}`}></p>
 
+                            <p className='price'> Rs {item?.price} </p>
+                        </div>
 
-                <div className="product-details">
-
-                    <h5 className='brand mt-1'> Construction Products </h5>
-
-                    <h4 className='product-title'>Low Price Supplier Frontlit Backlit Flex Banner </h4>
-
-                    <ReactStars
-                        count={5}
-                        size={24}
-                        value="3"
-                        edit={false}
-                        activeColor="#ffd700"
-                    />
-
-                    <p className={`description ${productsGrid === 12 ? "d-block" : "d-none"}`}>Haining Fuxing Compound New Material Co., Ltd.Custom manufacturer. was established in 2003. We are specialized in producing customized PVC flex banner materials. Provide (240-800gsm) PVC flex banners. Customized colors are available.</p>
-
-                    <p className='price'> Rs 6000 </p>
-
-                </div>
-
-                <div className="action-bar position-absolute">
-
-                    <div className="d-flex flex-column">
-
-                        <Link>
-                            <HiOutlineEye className="custom-icon" />
-                        </Link>
-
-                        <Link>
-                            <GoGitCompare className="custom-icon" />
-                        </Link>
-
-                        <Link>
-                            <BsCartPlus className="custom-icon" />
-                        </Link>
+                        <div className="action-bar position-absolute">
+                            <div className="d-flex flex-column">
+                                <Link to="#">
+                                    <HiOutlineEye className="custom-icon" />
+                                </Link>
+                                <Link to="#">
+                                    <GoGitCompare className="custom-icon" />
+                                </Link>
+                                <Link to="#">
+                                    <BsCartPlus className="custom-icon" />
+                                </Link>
+                            </div>
+                        </div>
 
                     </div>
-
                 </div>
-
-            </div>
-
-        </div>
-    )
+            ))}
+        </>
+    );
 }
 
 export default ProductCard;
