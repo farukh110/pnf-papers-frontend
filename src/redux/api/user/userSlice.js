@@ -2,11 +2,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { LOGIN_USER, REGISTER_USER } from "../../../app-constants";
 import userService from "./userService";
 
-const getUserFromLocalStorage = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null;
+const getCustomerFromLocalStorage = localStorage.getItem("customer") ? JSON.parse(localStorage.getItem("customer")) : null;
 
 const initialState = {
 
-    user: getUserFromLocalStorage,
+    user: getCustomerFromLocalStorage,
     isError: false,
     isSuccess: false,
     isLoading: false,

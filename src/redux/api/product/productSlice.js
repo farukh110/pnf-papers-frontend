@@ -1,6 +1,6 @@
 import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import productService from './productService';
-import { GET_ALL_PRODUCTS, GET_PRODUCT, RESET_ALL } from './../../../app-constants/index';
+import { ADD_TO_WISHLIST, GET_ALL_PRODUCTS, GET_PRODUCT, RESET_ALL } from './../../../app-constants/index';
 
 const initialState = {
     product: "",
@@ -35,6 +35,21 @@ export const getProduct = createAsyncThunk(GET_PRODUCT, async (productId, thunkA
     try {
 
         const response = await productService.getProduct(productId);
+        return response;
+
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response?.data || error.message);
+    }
+
+});
+
+// add to wishlist
+
+export const addToWishlist = createAsyncThunk(ADD_TO_WISHLIST, async (productId, thunkAPI) => {
+
+    try {
+
+        const response = await productService.addToWishlist(productId);
         return response;
 
     } catch (error) {
@@ -90,6 +105,28 @@ export const productSlice = createSlice({
                 state.productDetails = action.payload;
             })
             .addCase(getProduct.rejected, (state, action) => {
+
+                state.isLoading = false;
+                state.isError = true;
+                state.isSuccess = false;
+                state.message = action.error;
+            })
+            // add to wishlist
+            .addCase(addToWishlist.pending, (state) => {
+
+                state.isLoading = true;
+
+            })
+            .addCase(addToWishlist.fulfilled, (state, action) => {
+
+                state.isLoading = false;
+                state.isError = false;
+                state.isSuccess = true;
+                state.addToWishlist = action.payload;
+                state.message = "Product Added to Wishlist";
+
+            })
+            .addCase(addToWishlist.rejected, (state, action) => {
 
                 state.isLoading = false;
                 state.isError = true;
