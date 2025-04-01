@@ -3,14 +3,33 @@ import './index.scss';
 import { Link } from 'react-router-dom';
 import { Checkbox, InputNumber, Select, Tag } from 'antd';
 import ReactStars from 'react-rating-stars-component';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProductCard from './../../components/global/product-card/ProductCard';
 import Color from '../../components/global/controls/colors/Color';
 import BreadcrumbBanner from '../../components/global/breadcrumb-banner/BreadcrumbBanner';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllProducts } from '../../redux/api/product/productSlice';
 
 const ProductsList = () => {
 
     const [productsGrid, setProductsGrid] = useState(4);
+
+    const dispatch = useDispatch();
+
+    const { isSuccess, isError, isLoading, product } = useSelector(state => state.product);
+
+    console.log('product data: ', product);
+
+    useEffect(() => {
+
+        getProducts();
+
+    }, []);
+
+    const getProducts = () => {
+
+        dispatch(getAllProducts());
+    }
 
     const onGridControl = (item) => {
 
@@ -406,7 +425,7 @@ const ProductsList = () => {
 
                                 <div className='row'>
 
-                                    <ProductCard productsGrid={productsGrid} />
+                                    <ProductCard data={product} productsGrid={productsGrid} />
 
                                     <ProductCard productsGrid={productsGrid} />
 
