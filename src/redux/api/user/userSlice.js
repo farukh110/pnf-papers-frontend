@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { LOGIN_USER, REGISTER_USER } from "../../../app-constants";
+import { LOGIN_USER, REGISTER_USER, USER_WISHLIST } from "../../../app-constants";
 import userService from "./userService";
 
 const getCustomerFromLocalStorage = localStorage.getItem("customer") ? JSON.parse(localStorage.getItem("customer")) : null;
@@ -39,6 +39,20 @@ export const loginUser = createAsyncThunk(LOGIN_USER, async (user, thunkAPI) => 
         return thunkAPI.rejectWithValue(message);
 
     }
+
+});
+
+export const getUserWishlist = createAsyncThunk(USER_WISHLIST, async (thunkAPI) => {
+
+    try {
+
+        return await userService.getUserWishlist();
+
+    } catch (error) {
+        const message = error.response?.data?.message || error.message || 'Something went wrong';
+        return thunkAPI.rejectWithValue(message);
+    }
+
 });
 
 export const authSlice = createSlice({
@@ -81,6 +95,22 @@ export const authSlice = createSlice({
                 state.isSuccess = false;
                 state.message = action.error;
                 state.user = null;
+            })
+            // wishlist
+            .addCase(getUserWishlist.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getUserWishlist.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isError = false;
+                state.isSuccess = true;
+                state.wishlist = action.payload;
+            })
+            .addCase(getUserWishlist.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.isSuccess = false;
+                state.message = action.error;
             })
     }
 

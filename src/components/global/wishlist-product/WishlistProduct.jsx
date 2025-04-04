@@ -1,6 +1,11 @@
 import { LiaTimesSolid } from "react-icons/lia";
 
-const WishlistProduct = () => {
+const WishlistProduct = ({ item }) => {
+
+    const { brand, title, price, images } = item;
+
+    console.log('item: ', item);
+
     return (
         <>
             <div className="col-md-3">
@@ -13,15 +18,15 @@ const WishlistProduct = () => {
 
                     <div className="wishlist-product-img">
 
-                        <img src="https://pic.made-in-china.com/8f4j00GNEUvroRYVhd/Construction-Products1720170543000.jpg" alt="product 1" />
+                        <img src={images[0]?.url ? images[0]?.url : "https://pic.made-in-china.com/8f4j00GNEUvroRYVhd/Construction-Products1720170543000.jpg"} alt={title} />
 
                     </div>
 
                     <div className="wishlist-details p-3">
 
-                        <h1 className="wishlist-product-title"> Low Price Supplier Frontlit Backlit Flex Banner </h1>
+                        <h1 className="wishlist-product-title"> {title} </h1>
 
-                        <p className="wishlist-price mb-0"> Rs 6000 </p>
+                        <p className="wishlist-price mb-0"> Rs {price} </p>
 
                     </div>
 
