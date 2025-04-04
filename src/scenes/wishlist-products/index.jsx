@@ -2,8 +2,29 @@ import WishlistProductsListing from '../../assets/images/products/products-lisit
 import WishlistProduct from '../../components/global/wishlist-product/WishlistProduct';
 import './index.scss';
 import BreadcrumbBanner from '../../components/global/breadcrumb-banner/BreadcrumbBanner';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserWishlist } from '../../redux/api/user/userSlice';
+import { useEffect } from 'react';
 
 const WishlistProducts = () => {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+
+        getUserProductsWishlist();
+
+    }, []);
+
+    const getUserProductsWishlist = () => {
+
+        dispatch(getUserWishlist());
+    }
+
+    const dataItems = useSelector(state => state.auth.wishlist);
+
+    // console.log('wishlist: ', wishlist);
+
     return (
         <>
             <BreadcrumbBanner
@@ -23,8 +44,9 @@ const WishlistProducts = () => {
 
                     <div className='row'>
 
-                        <WishlistProduct />
-                        <WishlistProduct />
+                        {dataItems?.wishlist?.length > 0 && dataItems?.wishlist?.map((item) => {
+                            return (<WishlistProduct item={item} key={item?._id} />)
+                        })}
 
                     </div>
 

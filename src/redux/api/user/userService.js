@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BACKEND } from "../../utilities/base_url";
+import { BACKEND, config } from "../../utilities/base_url";
 
 const getTokenFromLocalStorage = localStorage.getItem("customer") ? JSON.parse(localStorage.getItem("customer")) : null;
 
@@ -44,9 +44,27 @@ const loginUser = async (userData) => {
     }
 };
 
+const getUserWishlist = async () => {
+
+    try {
+
+        const response = await axios.get(`${BACKEND}/user/wishlist`, config);
+
+        if (response.data) {
+            return response.data;
+        }
+
+    } catch (error) {
+
+        console.error('Error during wishlist:', error);
+        throw new Error(error.response?.data?.message || 'Wishlist data failed to load');
+    }
+};
+
 const userService = {
     registerUser,
-    loginUser
+    loginUser,
+    getUserWishlist
 };
 
 export default userService;
