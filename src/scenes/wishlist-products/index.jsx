@@ -5,6 +5,7 @@ import BreadcrumbBanner from '../../components/global/breadcrumb-banner/Breadcru
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserWishlist } from '../../redux/api/user/userSlice';
 import { useEffect } from 'react';
+import { addToWishlist } from './../../redux/api/product/productSlice';
 
 const WishlistProducts = () => {
 
@@ -23,7 +24,16 @@ const WishlistProducts = () => {
 
     const dataItems = useSelector(state => state.auth.wishlist);
 
-    // console.log('wishlist: ', wishlist);
+    const removeFromWishlist = (id) => {
+
+        dispatch(addToWishlist(id));
+
+        setTimeout(() => {
+
+            dispatch(getUserWishlist());
+
+        }, 300);
+    };
 
     return (
         <>
@@ -43,9 +53,9 @@ const WishlistProducts = () => {
                 <div className='container-xxl'>
 
                     <div className='row'>
-
+                        {dataItems?.wishlist?.length === 0 && (<h1 className='text-center mt-my-3'> No Data </h1>)}
                         {dataItems?.wishlist?.length > 0 && dataItems?.wishlist?.map((item) => {
-                            return (<WishlistProduct item={item} key={item?._id} />)
+                            return (<WishlistProduct removeItem={removeFromWishlist} item={item} key={item?._id} />)
                         })}
 
                     </div>
