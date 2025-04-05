@@ -1,6 +1,6 @@
 import { LiaTimesSolid } from "react-icons/lia";
 
-const WishlistProduct = ({ item }) => {
+const WishlistProduct = ({ item, removeItem }) => {
 
     const { brand, title, price, images } = item;
 
@@ -14,6 +14,7 @@ const WishlistProduct = ({ item }) => {
 
                     <LiaTimesSolid
                         className="position-absolute cross"
+                        onClick={() => removeItem(item?._id)}
                     />
 
                     <div className="wishlist-product-img">
