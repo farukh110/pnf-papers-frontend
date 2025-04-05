@@ -9,7 +9,7 @@ const BlogCard = (props) => {
 
     console.log('item: ', item);
 
-    const { image, createdAt, category, title, description } = item;
+    const { _id, image, createdAt, category, title } = item;
 
     return (
         <div className={`my-md-4 my-3 mt-md-0 col-lg-${lg} col-md-${md} col-sm-${sm}`}>
@@ -26,9 +26,9 @@ const BlogCard = (props) => {
 
                     <h5> {title} </h5>
                     <h5> {category} </h5>
-                    <p className='content' dangerouslySetInnerHTML={{ __html: description ? `${description.substring(0, 70)}...` : '' }}></p>
+                    {/* <p className='content' dangerouslySetInnerHTML={{ __html: description ? `${description.substring(0, 70)}...` : '' }}></p> */}
 
-                    <Link className='btn btn-dark btn-read-more' to="/blog/:id"> Read More </Link>
+                    <Link className='btn btn-dark btn-read-more' to={`/blog/${_id}`}> Read More </Link>
 
                 </div>
             </div>

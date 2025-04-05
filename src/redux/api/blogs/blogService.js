@@ -14,7 +14,21 @@ const getAllBlogs = async () => {
     }
 };
 
+const getBlog = async (blogId) => {
+
+    try {
+
+        const response = await axios.get(`${BACKEND}/blog/${blogId}`);
+        return response.data
+
+    } catch (error) {
+
+        throw new Error('Error: ', error);
+    }
+};
+
 export const blogService = {
 
-    getAllBlogs
+    getAllBlogs,
+    getBlog
 }; 
