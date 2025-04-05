@@ -2,8 +2,26 @@ import blogsListing from '../../assets/images/blogs/flex-backlit-banner-outdoor_
 import './index.scss';
 import BlogCard from '../../components/global/blog-card/BlogCard';
 import BreadcrumbBanner from '../../components/global/breadcrumb-banner/BreadcrumbBanner';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getAllBlogs } from '../../redux/api/blogs/blogSlice';
 
 const BlogList = () => {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+
+        getAllBlogsList();
+
+    }, []);
+
+    const getAllBlogsList = () => {
+
+        dispatch(getAllBlogs());
+    }
+
+    const { isLoading, isError, blogs } = useSelector(state => state.blogs);
 
     return (
 
@@ -29,15 +47,14 @@ const BlogList = () => {
 
                             <div className='row'>
 
-                                <BlogCard columnWidth={4} />
-                                <BlogCard columnWidth={4} />
-                                <BlogCard columnWidth={4} />
-                                <BlogCard columnWidth={4} />
-                                <BlogCard columnWidth={4} />
-                                <BlogCard columnWidth={4} />
-                                <BlogCard columnWidth={4} />
-                                <BlogCard columnWidth={4} />
-                                <BlogCard columnWidth={4} />
+                                {blogs?.data?.length > 0 && blogs?.data?.map((item) => {
+                                    return (<BlogCard
+                                        key={item?._id}
+                                        item={item}
+                                        columnWidth={{ lg: 12, md: 6, sm: 12, col: 12 }}
+                                    />)
+                                })
+                                }
 
                             </div>
 
