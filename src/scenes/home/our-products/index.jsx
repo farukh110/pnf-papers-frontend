@@ -1,8 +1,16 @@
+import { useSelector } from 'react-redux';
 import p1 from '../../../assets/images/slider/indoor.webp';
 import ProductCard from '../../../components/global/product-card/ProductCard';
 import './index.scss';
+import { useState } from 'react';
 
 const OurProducts = () => {
+
+    const [productsGrid, setProductsGrid] = useState(4);
+
+    const { isSuccess, isError, isLoading, product } = useSelector(state => state?.product);
+
+    console.log('our products: ', product);
 
     return (
         <>
@@ -26,14 +34,10 @@ const OurProducts = () => {
 
                             <div className='row'>
 
-                                <ProductCard />
-                                <ProductCard />
-                                <ProductCard />
-                                <ProductCard />
-                                <ProductCard />
-                                <ProductCard />
-                                <ProductCard />
-                                <ProductCard />
+                                <ProductCard
+                                    data={product ? product.slice(0, 8) : []}
+                                    productsGrid={productsGrid}
+                                />
 
                             </div>
 
