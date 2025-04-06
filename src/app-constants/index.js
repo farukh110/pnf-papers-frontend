@@ -9,3 +9,5 @@ export const RESET_ALL = "RESET_ALL";
 
 export const GET_ALL_BLOGS = "GET_ALL_BLOGS";
 export const GET_BLOG = "GET_BLOG";
+
+export const SEND_ENQUIRY = "SEND_ENQUIRY";
