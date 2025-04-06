@@ -7,8 +7,26 @@ import Blogs from "./blogs";
 import OurProducts from "./our-products";
 import SpecialProducts from "./special-products";
 import PopularProducts from "./popular-products";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllProducts } from "../../redux/api/product/productSlice";
 
 const Home = () => {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+
+        getProductsList();
+
+    }, []);
+
+    const getProductsList = () => {
+
+        dispatch(getAllProducts());
+
+    };
+
     return (
         <>
             <CustomBanner />

@@ -7,8 +7,6 @@ const BlogCard = (props) => {
     const { columnWidth = { lg: 4, md: 6, sm: 12 }, item } = props;
     const { lg, md, sm } = columnWidth;
 
-    console.log('item: ', item);
-
     const { _id, image, createdAt, category, title } = item;
 
     return (
