@@ -6,8 +6,6 @@ const getAllProducts = async () => {
     try {
         const response = await axios.get(`${BACKEND}/product`);
 
-        console.log('products response: ', response);
-
         return response.data;
 
     } catch (error) {

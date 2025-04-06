@@ -5,8 +5,18 @@ import { BsCartPlus } from "react-icons/bs";
 import { HiOutlineEye } from "react-icons/hi";
 import { GoGitCompare } from "react-icons/go";
 import { FaRegHeart } from "react-icons/fa6";
+import { useDispatch } from "react-redux";
+import { addToWishlist } from "../../../redux/api/product/productSlice";
 
-const PopularProductCard = () => {
+const PopularProductCard = ({ item }) => {
+
+    const dispatch = useDispatch();
+
+    const addToWishlistItem = (id) => {
+
+        dispatch(addToWishlist(id));
+    };
+
     return (
         <div className='col-md-3'>
 
@@ -14,23 +24,23 @@ const PopularProductCard = () => {
 
                 <div className="wishlist position-absolute">
 
-                    <Link to='/wishlist'>
-                        <FaRegHeart className="wishlist-icon" />
-                    </Link>
+                    <div>
+                        <FaRegHeart className="wishlist-icon" onClick={() => addToWishlistItem(item?._id)} />
+                    </div>
 
                 </div>
 
                 <div className="product-img">
                     <img
                         className='img-fluid first-img'
-                        src='https://pic.made-in-china.com/8f4j00GNEUvroRYVhd/Construction-Products1720170543000.jpg'
-                        alt='Construction Products'
+                        src={item?.images[0].url ? item?.images[0].url : 'https://pic.made-in-china.com/8f4j00GNEUvroRYVhd/Construction-Products1720170543000.jpg'}
+                        alt={item?.title}
                     />
 
                     <img
                         className='img-fluid last-img'
-                        src='https://image.made-in-china.com/258f1j00NRtYFSQfuTig/Sink.webp'
-                        alt='Construction Products'
+                        src={item?.images[0].url ? item?.images[0].url : 'https://pic.made-in-china.com/8f4j00GNEUvroRYVhd/Construction-Products1720170543000.jpg'}
+                        alt={item?.title}
                     />
 
                 </div>
@@ -38,19 +48,19 @@ const PopularProductCard = () => {
 
                 <div className="product-details">
 
-                    <h5 className='brand mt-1'> Construction Products </h5>
+                    <h5 className='brand mt-1'> {item?.brand} </h5>
 
-                    <h4 className='product-title'>Low Price Supplier Frontlit Backlit Flex Banner </h4>
+                    <h4 className='product-title'>{item?.title} </h4>
 
                     <ReactStars
                         count={5}
                         size={24}
-                        value="3"
+                        value={item?.totalRating}
                         edit={false}
                         activeColor="#ffd700"
                     />
 
-                    <p className='price'> Rs 6000 </p>
+                    <p className='price'> Rs {item?.price} </p>
 
                 </div>
 

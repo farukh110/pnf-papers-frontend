@@ -1,8 +1,11 @@
+import { useSelector } from 'react-redux';
 import p1 from '../../../assets/images/slider/indoor.webp';
 import PopularProductCard from '../../../components/global/popular-card/PopularProductCard';
 import './index.scss';
 
 const PopularProducts = () => {
+
+    const { isSuccess, isError, isLoading, product } = useSelector(state => state?.product);
 
     return (
         <>
@@ -26,10 +29,17 @@ const PopularProducts = () => {
 
                             <div className='row'>
 
-                                <PopularProductCard />
-                                <PopularProductCard />
-                                <PopularProductCard />
-                                <PopularProductCard />
+                                {product.length && product?.map((item) => {
+
+                                    if (item?.tags === "Popular") {
+
+                                        return (
+                                            <PopularProductCard key={item?._id} item={item} />
+                                        )
+                                    }
+
+                                })
+                                }
 
                             </div>
 

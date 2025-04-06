@@ -8,7 +8,8 @@ import { CiHeart } from "react-icons/ci";
 import { FaRegHeart } from "react-icons/fa6";
 import { Progress } from 'antd';
 
-const SpecialProductCard = () => {
+const SpecialProductCard = ({ item }) => {
+
     return (
         <div className='col-md-4'>
 
@@ -40,19 +41,19 @@ const SpecialProductCard = () => {
 
                 <div className="product-details">
 
-                    <h5 className='brand mt-1'> Construction Products </h5>
+                    <h5 className='brand mt-1'> {item?.brand} </h5>
 
-                    <h4 className='product-title'>Low Price Supplier Frontlit Backlit Flex Banner </h4>
+                    <h4 className='product-title'>{item?.title} </h4>
 
                     <ReactStars
                         count={5}
                         size={24}
-                        value="3"
+                        value={item?.totalRating}
                         edit={false}
                         activeColor="#ffd700"
                     />
 
-                    <p className='price'> Rs 6000 <strike> 2000 </strike> </p>
+                    <p className='price'> Rs {item?.price} <strike> 2000 </strike> </p>
 
                     <div className="row">
 
@@ -101,13 +102,13 @@ const SpecialProductCard = () => {
 
                         <div className="col-md-4">
 
-                            5 Products
+                            {item?.quantity} Products
 
                         </div>
 
                         <div className="col-md-8">
 
-                            <Progress percent={30} />
+                            <Progress percent={item?.quantity / item?.quantity + item?.sold * 100} />
 
                         </div>
 
