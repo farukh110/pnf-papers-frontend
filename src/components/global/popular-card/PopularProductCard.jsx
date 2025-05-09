@@ -1,5 +1,5 @@
 import ReactStars from "react-rating-stars-component";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './index.scss';
 import { BsCartPlus } from "react-icons/bs";
 import { HiOutlineEye } from "react-icons/hi";
@@ -9,6 +9,8 @@ import { useDispatch } from "react-redux";
 import { addToWishlist } from "../../../redux/api/product/productSlice";
 
 const PopularProductCard = ({ item }) => {
+
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
@@ -30,7 +32,7 @@ const PopularProductCard = ({ item }) => {
 
                 </div>
 
-                <div className="product-img">
+                <div onClick={() => navigate(`/product/${item?._id}`)} className="product-img">
                     <img
                         className='img-fluid first-img'
                         src={item?.images[0].url ? item?.images[0].url : 'https://pic.made-in-china.com/8f4j00GNEUvroRYVhd/Construction-Products1720170543000.jpg'}
@@ -68,7 +70,7 @@ const PopularProductCard = ({ item }) => {
 
                     <div className="d-flex flex-column">
 
-                        <Link>
+                        <Link to={`/product/${item?._id}`}>
                             <HiOutlineEye className="custom-icon" />
                         </Link>
 

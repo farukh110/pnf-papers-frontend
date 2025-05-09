@@ -1,5 +1,5 @@
 import ReactStars from "react-rating-stars-component";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './index.scss';
 import { BsCartPlus } from "react-icons/bs";
 import { HiOutlineEye } from "react-icons/hi";
@@ -9,6 +9,8 @@ import { FaRegHeart } from "react-icons/fa6";
 import { Progress } from 'antd';
 
 const SpecialProductCard = ({ item }) => {
+
+    const navigate = useNavigate();
 
     return (
         <div className='col-md-4'>
@@ -23,7 +25,7 @@ const SpecialProductCard = ({ item }) => {
 
                 </div>
 
-                <div className="product-img">
+                <div onClick={() => navigate(`/product/${item?._id}`)} className="product-img">
                     <img
                         className='img-fluid first-img'
                         src='https://pic.made-in-china.com/8f4j00GNEUvroRYVhd/Construction-Products1720170543000.jpg'
@@ -114,7 +116,7 @@ const SpecialProductCard = ({ item }) => {
 
                     </div>
 
-                    <button className="btn btn-dark btn-cart mt-md-3"> Add to Cart </button>
+                    <button onClick={() => navigate(`/product/${item?._id}`)} className="btn btn-dark btn-cart mt-md-3"> View </button>
 
 
                 </div>
@@ -123,7 +125,7 @@ const SpecialProductCard = ({ item }) => {
 
                     <div className="d-flex flex-column">
 
-                        <Link>
+                        <Link to={`/product/${item?._id}`}>
                             <HiOutlineEye className="custom-icon" />
                         </Link>
 
