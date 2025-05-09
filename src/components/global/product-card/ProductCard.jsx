@@ -1,5 +1,5 @@
 import ReactStars from "react-rating-stars-component";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import './index.scss';
 import { BsCartPlus } from "react-icons/bs";
 import { HiOutlineEye } from "react-icons/hi";
@@ -11,6 +11,7 @@ import { addToWishlist } from "../../../redux/api/product/productSlice";
 const ProductCard = (props) => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const { productsGrid, data } = props;
     let location = useLocation();
@@ -37,7 +38,7 @@ const ProductCard = (props) => {
                             {/* </Link> */}
                         </div>
 
-                        <div className="product-img">
+                        <div onClick={() => navigate(`/product/${item?._id}`)} className="product-img">
                             <img
                                 className='img-fluid first-img'
                                 src={item?.images[0]?.url}
@@ -69,7 +70,7 @@ const ProductCard = (props) => {
 
                         <div className="action-bar position-absolute">
                             <div className="d-flex flex-column">
-                                <Link to="#">
+                                <Link to={`/product/${item?._id}`}>
                                     <HiOutlineEye className="custom-icon" />
                                 </Link>
                                 <Link to="#">

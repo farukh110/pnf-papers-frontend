@@ -1,26 +1,34 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BreadcrumbBanner from '../../components/global/breadcrumb-banner/BreadcrumbBanner';
-import ProductDetailImg from '../../assets/images/products/products-lisiting2.webp';
+// import ProductDetailImg from '../../assets/images/products/products-lisiting2.webp';
 import './index.scss';
 import PopularProducts from '../home/popular-products';
 import ReactStars from 'react-rating-stars-component';
 import { Button, Divider, Form, Input, InputNumber, Select, Tag, Tooltip } from 'antd';
-import groupImg1 from '../../assets/images/products/products-lisiting.webp';
-import groupImg2 from '../../assets/images/slider/indoor.webp';
-import groupImg3 from '../../assets/images/slider/p4.jpg';
-
 import Magnifier from 'react-magnifier';
 import Color from '../../components/global/controls/colors/Color';
 import { IoIosGitCompare } from 'react-icons/io';
 import { GoGitCompare, GoHeart } from 'react-icons/go';
 import { CiHeart } from 'react-icons/ci';
 import { IoCopyOutline } from 'react-icons/io5';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProduct } from '../../redux/api/product/productSlice';
 
 const ProductDetail = () => {
 
     const [orderProducts, setOrderProducts] = useState(false);
     const [tooltipVisible, setTooltipVisible] = useState(false);
     const [tooltipMessage, setTooltipMessage] = useState('Click to Copy Product Link');
+    const params = useParams();
+    const dispatch = useDispatch();
+
+    const productId = params.id;
+
+    const { productDetails, isLoading, isError } = useSelector((state) => state.product);
+
+    console.log('productDetails: ', productDetails);
+
 
     const onFinish = (values) => {
         console.log('Success:', values);
@@ -28,6 +36,12 @@ const ProductDetail = () => {
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+
+    useEffect(() => {
+
+        dispatch(getProduct(productId));
+
+    }, []);
 
     const copyToClipboard = (text) => {
         var textField = document.createElement('textarea');
@@ -68,7 +82,7 @@ const ProductDetail = () => {
             <BreadcrumbBanner
                 metaTitle="Product Details"
                 metaLink="/product"
-                imageSource={ProductDetailImg}
+                imageSource={productDetails?.images[0]?.url}
                 imageAlt="Product Details"
                 bannerHeading="Product Details"
                 homeTitle="Home"
@@ -85,7 +99,7 @@ const ProductDetail = () => {
                             <div className='product-detail-main'>
 
                                 <Magnifier
-                                    src={ProductDetailImg}
+                                    src={productDetails?.images[0]?.url}
                                     width="100%"
                                     mgWidth={200}
                                     mgHeight={200}
@@ -94,46 +108,18 @@ const ProductDetail = () => {
                             </div>
 
                             <div className='row group-images mt-md-3'>
-
-                                <div className='col-md-4'>
-
-                                    <div className='group-box'>
-
-                                        <img
-                                            className='img-fluid'
-                                            src={groupImg1}
-                                        />
-
-                                    </div>
-
-                                </div>
-
-                                <div className='col-md-4'>
-
-                                    <div className='group-box'>
-
-                                        <img
-                                            className='img-fluid'
-                                            src={groupImg2}
-                                        />
-
-                                    </div>
-
-                                </div>
-
-                                <div className='col-md-4'>
-
-                                    <div className='group-box'>
-
-                                        <img
-                                            className='img-fluid'
-                                            src={groupImg3}
-                                        />
-
-                                    </div>
-
-                                </div>
-
+                                {productDetails?.images.map((item) => {
+                                    return (
+                                        <div key={item?._id} className='col-md-4'>
+                                            <div className='group-box'>
+                                                <img
+                                                    className='img-fluid'
+                                                    src={item?.url}
+                                                />
+                                            </div>
+                                        </div>
+                                    )
+                                })}
                             </div>
 
                         </div>
@@ -142,18 +128,18 @@ const ProductDetail = () => {
 
                             <div className='product-detail-right pt-0 pb-2'>
 
-                                <h1 className='product-detail-title mb-0'> Low Price Supplier Frontlit Backlit Flex Banner Advertising Banner Roll up Flex Banner PVC Light Fabric </h1>
+                                <h1 className='product-detail-title mb-0'> {productDetails?.title} </h1>
 
                                 <Divider className='mt-md-3 mb-md-3' />
 
-                                <h2 className='product-detail-price mb-0'> <span className='price-symbol'> Rs </span> 5000 </h2>
+                                <h2 className='product-detail-price mb-0'> <span className='price-symbol'> Rs </span> {productDetails?.price} </h2>
 
                                 <div className='d-flex align-items-center'>
 
                                     <ReactStars
                                         count={5}
                                         size={24}
-                                        value={3}
+                                        value={Number(productDetails?.totalRating) || 0}
                                         edit={false}
                                         activeColor="#ffd700"
                                     />
@@ -189,7 +175,7 @@ const ProductDetail = () => {
                                         </div>
 
                                         <div className='col-md-8'>
-                                            <p className='detail-area-text mb-0'>Frontlit Backlit</p>
+                                            <p className='detail-area-text mb-0'>{productDetails?.brand}</p>
                                         </div>
                                     </div>
                                     <div className='row mt-md-2'>
@@ -198,7 +184,7 @@ const ProductDetail = () => {
                                         </div>
 
                                         <div className='col-md-8'>
-                                            <p className='detail-area-text mb-0'>Venial Paper, Frosted Paper, Panaflex Paper </p>
+                                            <p className='detail-area-text mb-0'>{productDetails?.category} </p>
                                         </div>
                                     </div>
                                     <div className='row mt-md-2'>
@@ -208,11 +194,10 @@ const ProductDetail = () => {
 
                                         <div className='col-md-8'>
                                             <p className='detail-area-text mb-0'>
-                                                <Tag className='mb-2'>Venial Paper</Tag>
-                                                <Tag className='mb-2'>Silver Paper</Tag>
-                                                <Tag className='mb-2'>Golden Paper</Tag>
-                                                <Tag className='mb-2'>Frosted Paper</Tag>
-                                                <Tag className='mb-2'>Panaflex Paper</Tag>
+
+                                                {/* {productDetails?.tags.length >= 0 && productDetails?.tags?.map((item, index) => <Tag key={index} className='mb-2'>{item}</Tag>)} */}
+
+                                                <Tag className='mb-2'>{productDetails?.tags}</Tag>
 
                                             </p>
                                         </div>
@@ -268,7 +253,7 @@ const ProductDetail = () => {
                                         <div className='col-md-8'>
                                             <div className='color-collection d-flex flex-wrap mb-0'>
 
-                                                <Color />
+                                                <Color colorItems={productDetails?.color} />
 
                                             </div>
                                         </div>
@@ -308,7 +293,7 @@ const ProductDetail = () => {
                                         <div className='col-md-8'>
                                             <p className='detail-area-text mb-0'>
                                                 <Tooltip placement="topLeft" title={tooltipMessage} visible={tooltipVisible}>
-                                                    <Button className='ps-0' type="link" onClick={() => copyToClipboard('https://www.example.com/product/1')}> <IoCopyOutline /> Click to Copy Product Link </Button>
+                                                    <Button className='ps-0' type="link" onClick={() => copyToClipboard(window.location.href)}> <IoCopyOutline /> Click to Copy Product Link </Button>
                                                 </Tooltip>
                                             </p>
                                         </div>
@@ -362,13 +347,9 @@ const ProductDetail = () => {
                     <div className='row description-shadow'>
                         <div className='col-md-12 p-4'>
                             <h3 className='mb-0'>Product Description</h3>
-                            <p>
-                                Haining Fuxing Compound New Material Co., Ltd. Custom manufacturer. was established
-                                in 2003. We are specialized in producing customized PVC flex banner materials.
-                                Provide (240-800gsm) PVC flex banners. Customized colors are available. The maximum
-                                width is 5.1m. The company also produces PVC Films, PVC Tarpaulins, PVC Free Banners,
-                                Textile Banners, PVC Ceiling Films, PVC Wall Coverings, Window Curtains, One Way Vision,
-                                Reflective Banner & Vinyl, etc.
+                            <p dangerouslySetInnerHTML={{
+                                __html: productDetails?.description
+                            }}>
                             </p>
                         </div>
                     </div>
@@ -394,7 +375,7 @@ const ProductDetail = () => {
                                         <ReactStars
                                             count={5}
                                             size={24}
-                                            value={3}
+                                            value={Number(productDetails?.totalRating) || 0}
                                             edit={false}
                                             activeColor="#ffd700"
                                         />

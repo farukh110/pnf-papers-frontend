@@ -15,7 +15,7 @@ const getAllProducts = async () => {
 
 const getProduct = async (productId) => {
 
-    const response = await axios.get(`${BACKEND}/product/${productId}`, config);
+    const response = await axios.get(`${BACKEND}/product/${productId}`);
     return response.data;
 }
 
