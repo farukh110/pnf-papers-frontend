@@ -14,6 +14,8 @@ import { IoCopyOutline } from 'react-icons/io5';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../../redux/api/product/productSlice';
+import { toast, ToastContainer } from 'react-toastify';
+import { addToCart } from '../../redux/api/user/userSlice';
 
 const ProductDetail = () => {
 
@@ -23,11 +25,16 @@ const ProductDetail = () => {
     const params = useParams();
     const dispatch = useDispatch();
 
+    const [color, setColor] = useState(null);
+    const [quantity, setQuantity] = useState(1);
+
     const productId = params.id;
 
     const { productDetails, isLoading, isError } = useSelector((state) => state.product);
 
     console.log('productDetails: ', productDetails);
+
+    console.log('color: ', color);
 
 
     const onFinish = (values) => {
@@ -35,6 +42,16 @@ const ProductDetail = () => {
     };
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
+    };
+
+    const handleUploadCart = () => {
+
+        if (color === null) {
+            toast.error("Please choose color");
+            return false;
+        } else {
+            dispatch(addToCart({ productId: productDetails?._id, quantity, color, price: productDetails?.price }));
+        }
     };
 
     useEffect(() => {
@@ -75,6 +92,7 @@ const ProductDetail = () => {
 
     const onQuantityChange = (value) => {
         console.log('changed', value);
+        setQuantity(value);
     };
 
     return (
@@ -253,7 +271,9 @@ const ProductDetail = () => {
                                         <div className='col-md-8'>
                                             <div className='color-collection d-flex flex-wrap mb-0'>
 
-                                                <Color colorItems={productDetails?.color} />
+                                                <Color
+                                                    setColor={setColor}
+                                                    colorItems={productDetails?.color} />
 
                                             </div>
                                         </div>
@@ -267,7 +287,8 @@ const ProductDetail = () => {
                                         <div className='col-md-8'>
                                             <InputNumber
                                                 min={1}
-                                                defaultValue={1}
+                                                // defaultValue={quantity}
+                                                value={quantity}
                                                 onChange={onQuantityChange}
                                             />
                                         </div>
@@ -317,7 +338,7 @@ const ProductDetail = () => {
                                     <div className='row'>
                                         <div className='col-md-3'>
 
-                                            <Button type="primary" className='btn-cart w-100' htmlType="button">
+                                            <Button onClick={() => handleUploadCart(productDetails?._id)} type="primary" className='btn-cart w-100' htmlType="button">
                                                 Add to Cart
                                             </Button>
 
@@ -508,6 +529,7 @@ const ProductDetail = () => {
             </section>
 
             <PopularProducts />
+            <ToastContainer />
         </>
     )
 }

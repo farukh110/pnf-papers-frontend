@@ -5,8 +5,24 @@ import './index.scss';
 import { Button, InputNumber, Tooltip } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getCart } from '../../redux/api/user/userSlice';
 
 const Cart = () => {
+
+    const dispatch = useDispatch();
+
+    const { cartProducts, isLoading, isError, isSuccess } = useSelector((state) => state.auth);
+
+    useEffect(() => {
+
+        dispatch(getCart());
+
+    }, []);
+
+    console.log('cartProducts: ', cartProducts);
+
 
     const onQuantityChange = (value) => {
         console.log('changed', value);
@@ -39,58 +55,98 @@ const Cart = () => {
                                         <th> Image </th>
                                         <th> Product Name </th>
                                         <th> Quantity </th>
+                                        <th> Color </th>
                                         <th> Price </th>
                                         <th> Total Price </th>
                                         <th> Action </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
 
-                                            <a href="#">
+                                    {
+                                        cartProducts && cartProducts.map((item) => {
+                                            return (
+                                                <tr key={item?._id}>
+                                                    <td>
 
-                                                <img
-                                                    className="img-fluid"
-                                                    src={product1}
-                                                />
-                                            </a>
-                                        </td>
-                                        <td>
+                                                        <a href="#">
 
-                                            <p className='mb-0'> Body Oil </p>
-                                        </td>
-                                        <td>
+                                                            <img
+                                                                className="img-fluid"
+                                                                src={product1}
+                                                            />
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <p className='mb-0'> {item?.productId?.title} </p>
+                                                    </td>
+                                                    <td>
 
-                                            <span className="quantity-wrapper">
-                                                <InputNumber
-                                                    min={1}
-                                                    defaultValue={1}
-                                                    onChange={onQuantityChange}
-                                                />
-                                            </span>
-                                        </td>
+                                                        <span className="quantity-wrapper">
+                                                            <InputNumber
+                                                                min={1}
+                                                                value={item?.quantity}
+                                                                // defaultValue={item?}
+                                                                onChange={onQuantityChange}
+                                                            />
+                                                        </span>
+                                                    </td>
 
-                                        <td>
+                                                    <td>
+                                                        <ul className='colors ps-0'>
+                                                            {
+                                                                Array.isArray(item?.color)
+                                                                    ? item.color.map((clr) => {
+                                                                        let colorValue = clr?.title;
+                                                                        if (colorValue && !colorValue.startsWith('#') && colorValue.length === 6) {
+                                                                            colorValue = `#${colorValue}`;
+                                                                        }
 
-                                            <p className='mb-0'>
+                                                                        return (
+                                                                            <li
+                                                                                key={clr?._id}
+                                                                                style={{ background: colorValue || 'transparent' }}
+                                                                            ></li>
+                                                                        );
+                                                                    })
+                                                                    : item?.color && (
+                                                                        <li
+                                                                            key={item.color?._id}
+                                                                            style={{
+                                                                                background: item.color?.title?.length === 6 && !item.color.title.startsWith('#')
+                                                                                    ? `#${item.color.title}`
+                                                                                    : item.color.title || 'transparent',
+                                                                            }}
+                                                                        ></li>
+                                                                    )
+                                                            }
+                                                        </ul>
+                                                    </td>
 
-                                                RS 150.00 <span className="shoppinglist_discount"> 50 </span>
-                                            </p>
-                                        </td>
-                                        <td>
 
-                                            <p className='mb-0'> RS 250.00 </p>
-                                        </td>
-                                        <td>
+                                                    <td>
 
-                                            <p className='mb-0'>
-                                                <Tooltip title="delete">
-                                                    <Button type="primary" shape="circle" icon={<DeleteOutlined />} />
-                                                </Tooltip>
-                                            </p>
-                                        </td>
-                                    </tr>
+                                                        <p className='mb-0'>
+
+                                                            RS {item?.price} <span className="shoppinglist_discount"> </span>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+
+                                                        <p className='mb-0'> RS {item?.price * item?.quantity} </p>
+                                                    </td>
+                                                    <td>
+
+                                                        <p className='mb-0'>
+                                                            <Tooltip title="delete">
+                                                                <Button type="primary" shape="circle" icon={<DeleteOutlined />} />
+                                                            </Tooltip>
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
 
                                 </tbody>
                             </table>
