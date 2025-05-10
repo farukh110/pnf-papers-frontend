@@ -61,10 +61,30 @@ const getUserWishlist = async () => {
     }
 };
 
+const addToCart = async (cartData) => {
+
+    const response = await axios.post(`${BACKEND}/user/cart`, cartData, config);
+
+    if (response?.data) {
+        return response?.data
+    }
+}
+
+const getCart = async () => {
+
+    const response = await axios.get(`${BACKEND}/user/cart`, config);
+
+    if (response?.data) {
+        return response?.data
+    }
+}
+
 const userService = {
     registerUser,
     loginUser,
-    getUserWishlist
+    getUserWishlist,
+    addToCart,
+    getCart
 };
 
 export default userService;

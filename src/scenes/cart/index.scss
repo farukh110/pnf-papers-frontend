@@ -70,3 +70,18 @@
         }
     }
 }
+
+.colors {
+
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    li {
+        width: 20px;
+        height: 20px;
+        background: red;
+        border-radius: 50%;
+    }
+}
