@@ -7,6 +7,9 @@ export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
 export const USER_WISHLIST = "USER_WISHLIST";
 export const USER_ADD_TO_CART = "USER_ADD_TO_CART";
 export const GET_USER_CART = "GET_USER_CART";
+export const DELETE_USER_CART = "DELETE_USER_CART";
+
+export const UPDATE_PRODUCT_CART = "UPDATE_PRODUCT_CART";
 
 export const RESET_ALL = "RESET_ALL";
 
