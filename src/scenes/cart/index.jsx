@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import cartImg from '../../assets/images/blogs/flex-backlit-banner-outdoor_82337.jpg';
 import BreadcrumbBanner from "../../components/global/breadcrumb-banner/BreadcrumbBanner";
 import product1 from "../../assets/images/products/products-lisiting2.webp";
@@ -6,12 +7,12 @@ import { Button, InputNumber, Tooltip } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getCart } from '../../redux/api/user/userSlice';
+import { getCart, removeProductFromCart, updateProductCart } from '../../redux/api/user/userSlice';
 
 const Cart = () => {
 
     const dispatch = useDispatch();
+    const [productUpdatedDetail, setProductUpdatedDetail] = useState(null);
 
     const { cartProducts, isLoading, isError, isSuccess } = useSelector((state) => state.auth);
 
@@ -21,12 +22,42 @@ const Cart = () => {
 
     }, []);
 
-    console.log('cartProducts: ', cartProducts);
+    useEffect(() => {
+
+        if (productUpdatedDetail !== null) {
+
+            dispatch(updateProductCart({ cartItemId: productUpdatedDetail?.cartItemId, quantity: productUpdatedDetail?.quantity }));
+
+            setTimeout(() => {
+
+                dispatch(getCart());
+
+            }, 200);
+        }
+
+    }, [productUpdatedDetail]);
+
+    const deleteProduct = (id) => {
+        dispatch(removeProductFromCart(id));
+
+        setTimeout(() => {
+
+            dispatch(getCart());
+
+        }, 200);
+    }
+
+    // const updateProduct = (productUpdatedDetail) => {
+
+    // }
+
+    console.log('productUpdatedDetail: ', productUpdatedDetail);
 
 
-    const onQuantityChange = (value) => {
-        console.log('changed', value);
-    };
+    // const onQuantityChange = (value) => {
+    //     console.log('changed', value);
+    //     setProductUpdatedDetail(value);
+    // };
 
     return (
         <>
@@ -85,9 +116,9 @@ const Cart = () => {
                                                         <span className="quantity-wrapper">
                                                             <InputNumber
                                                                 min={1}
-                                                                value={item?.quantity}
+                                                                value={productUpdatedDetail?.quantity ? productUpdatedDetail?.quantity : item?.quantity}
                                                                 // defaultValue={item?}
-                                                                onChange={onQuantityChange}
+                                                                onChange={(value) => setProductUpdatedDetail({ cartItemId: item?._id, quantity: value })}
                                                             />
                                                         </span>
                                                     </td>
@@ -139,7 +170,7 @@ const Cart = () => {
 
                                                         <p className='mb-0'>
                                                             <Tooltip title="delete">
-                                                                <Button type="primary" shape="circle" icon={<DeleteOutlined />} />
+                                                                <Button onClick={() => deleteProduct(item?._id)} type="primary" shape="circle" icon={<DeleteOutlined />} />
                                                             </Tooltip>
                                                         </p>
                                                     </td>

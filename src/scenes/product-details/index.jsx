@@ -7,15 +7,15 @@ import ReactStars from 'react-rating-stars-component';
 import { Button, Divider, Form, Input, InputNumber, Select, Tag, Tooltip } from 'antd';
 import Magnifier from 'react-magnifier';
 import Color from '../../components/global/controls/colors/Color';
-import { IoIosGitCompare } from 'react-icons/io';
+// import { IoIosGitCompare } from 'react-icons/io';
 import { GoGitCompare, GoHeart } from 'react-icons/go';
-import { CiHeart } from 'react-icons/ci';
+// import { CiHeart } from 'react-icons/ci';
 import { IoCopyOutline } from 'react-icons/io5';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../../redux/api/product/productSlice';
 import { toast, ToastContainer } from 'react-toastify';
-import { addToCart } from '../../redux/api/user/userSlice';
+import { addToCart, getCart } from '../../redux/api/user/userSlice';
 
 const ProductDetail = () => {
 
@@ -24,13 +24,16 @@ const ProductDetail = () => {
     const [tooltipMessage, setTooltipMessage] = useState('Click to Copy Product Link');
     const params = useParams();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [color, setColor] = useState(null);
     const [quantity, setQuantity] = useState(1);
+    const [alreadyAdded, setAlreadyAdded] = useState(false);
 
     const productId = params.id;
 
     const { productDetails, isLoading, isError } = useSelector((state) => state.product);
+    const { cartProducts } = useSelector((state) => state.auth);
 
     console.log('productDetails: ', productDetails);
 
@@ -51,12 +54,27 @@ const ProductDetail = () => {
             return false;
         } else {
             dispatch(addToCart({ productId: productDetails?._id, quantity, color, price: productDetails?.price }));
+            navigate('/cart');
         }
     };
 
     useEffect(() => {
 
         dispatch(getProduct(productId));
+        dispatch(getCart());
+
+    }, []);
+
+    useEffect(() => {
+
+        for (let index = 0; index < cartProducts?.length; index++) {
+
+            if (productId === cartProducts[index]?.productId?._id) {
+
+                setAlreadyAdded(true);
+
+            }
+        }
 
     }, []);
 
@@ -263,36 +281,44 @@ const ProductDetail = () => {
                                         </div>
                                     </div>
 
-                                    <div className='row mt-md-3'>
-                                        <div className='col-md-4'>
-                                            <p className='detail-area-title mb-0'> Color: </p>
-                                        </div>
+                                    {
+                                        alreadyAdded === false && <>
+                                            <div className='row mt-md-3'>
+                                                <div className='col-md-4'>
+                                                    <p className='detail-area-title mb-0'> Color: </p>
+                                                </div>
 
-                                        <div className='col-md-8'>
-                                            <div className='color-collection d-flex flex-wrap mb-0'>
+                                                <div className='col-md-8'>
+                                                    <div className='color-collection d-flex flex-wrap mb-0'>
 
-                                                <Color
-                                                    setColor={setColor}
-                                                    colorItems={productDetails?.color} />
+                                                        <Color
+                                                            setColor={setColor}
+                                                            colorItems={productDetails?.color} />
 
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        </>
+                                    }
 
-                                    <div className='row mt-md-2'>
-                                        <div className='col-md-4'>
-                                            <p className='detail-area-title mb-0'> Quantity: </p>
-                                        </div>
+                                    {
+                                        alreadyAdded === false && <>
+                                            <div className='row mt-md-2'>
+                                                <div className='col-md-4'>
+                                                    <p className='detail-area-title mb-0'> Quantity: </p>
+                                                </div>
 
-                                        <div className='col-md-8'>
-                                            <InputNumber
-                                                min={1}
-                                                // defaultValue={quantity}
-                                                value={quantity}
-                                                onChange={onQuantityChange}
-                                            />
-                                        </div>
-                                    </div>
+                                                <div className='col-md-8'>
+                                                    <InputNumber
+                                                        min={1}
+                                                        // defaultValue={quantity}
+                                                        value={quantity}
+                                                        onChange={onQuantityChange}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </>
+                                    }
 
                                     <div className='row mt-md-2'>
                                         <div className='col-md-4'>
@@ -338,8 +364,10 @@ const ProductDetail = () => {
                                     <div className='row'>
                                         <div className='col-md-3'>
 
-                                            <Button onClick={() => handleUploadCart(productDetails?._id)} type="primary" className='btn-cart w-100' htmlType="button">
-                                                Add to Cart
+                                            <Button onClick={() => { alreadyAdded ? navigate('/cart') : handleUploadCart(productDetails?._id) }} type="primary" className='btn-cart w-100' htmlType="button">
+
+                                                {alreadyAdded ? "Go to Cart" : "Add to Cart"}
+
                                             </Button>
 
                                         </div>

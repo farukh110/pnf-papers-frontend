@@ -79,12 +79,32 @@ const getCart = async () => {
     }
 }
 
+const removeProductFromCart = async (cartItemId) => {
+
+    const response = await axios.delete(`${BACKEND}/user/delete-product-cart/${cartItemId}`, config);
+
+    if (response?.data) {
+        return response?.data
+    }
+}
+
+const updateProductCart = async (cartDetail) => {
+
+    const response = await axios.put(`${BACKEND}/user/update-product-cart/${cartDetail.cartItemId}/${cartDetail.quantity}`, config);
+
+    if (response?.data) {
+        return response?.data
+    }
+}
+
 const userService = {
     registerUser,
     loginUser,
     getUserWishlist,
     addToCart,
-    getCart
+    getCart,
+    removeProductFromCart,
+    updateProductCart
 };
 
 export default userService;
