@@ -8,8 +8,14 @@ import { LuUser2 } from 'react-icons/lu';
 import { DownOutlined, MenuOutlined } from '@ant-design/icons';
 import { Dropdown, Space } from 'antd';
 import { GoGitCompare } from 'react-icons/go';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 const Header = () => {
+
+    const [totalAmount, setTotalAmount] = useState(null);
+    const { cartProducts, isLoading, isError, isSuccess } = useSelector((state) => state.auth);
+
 
     const items = [
         {
@@ -37,6 +43,19 @@ const Header = () => {
             ),
         },
     ];
+
+    useEffect(() => {
+
+        let sum = 0;
+
+        for (let index = 0; index < cartProducts?.length; index++) {
+
+            sum = sum + (Number(cartProducts[index]?.quantity) * cartProducts[index]?.price);
+            console.log('total: ', sum);
+            setTotalAmount(sum);
+        }
+
+    }, [cartProducts]);
 
     return (
         <>
@@ -162,12 +181,12 @@ const Header = () => {
 
                                             <div className='d-flex flex-column'>
 
-                                                <span className='badge bg-warning custom-cart'> 0 </span>
+                                                <span className='badge bg-warning custom-cart'> {cartProducts?.length ? cartProducts?.length : 0} </span>
 
                                             </div>
                                         </Link>
 
-                                        <p className='mb-0'> 2000 Rs </p>
+                                        <p className='mb-0'> Rs {totalAmount ? totalAmount : 0} </p>
 
                                     </div>
 

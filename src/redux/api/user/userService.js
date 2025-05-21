@@ -90,7 +90,7 @@ const removeProductFromCart = async (cartItemId) => {
 
 const updateProductCart = async (cartDetail) => {
 
-    const response = await axios.put(`${BACKEND}/user/update-product-cart/${cartDetail.cartItemId}/${cartDetail.quantity}`, config);
+    const response = await axios.delete(`${BACKEND}/user/update-product-cart/${cartDetail.cartItemId}/${cartDetail.quantity}`, config);
 
     if (response?.data) {
         return response?.data
