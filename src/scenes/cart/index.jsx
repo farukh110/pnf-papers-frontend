@@ -8,11 +8,13 @@ import { DeleteOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCart, removeProductFromCart, updateProductCart } from '../../redux/api/user/userSlice';
+import { ToastContainer } from 'react-toastify';
 
 const Cart = () => {
 
     const dispatch = useDispatch();
     const [productUpdatedDetail, setProductUpdatedDetail] = useState(null);
+    const [totalAmount, setTotalAmount] = useState(null);
 
     const { cartProducts, isLoading, isError, isSuccess } = useSelector((state) => state.auth);
 
@@ -51,13 +53,26 @@ const Cart = () => {
 
     // }
 
-    console.log('productUpdatedDetail: ', productUpdatedDetail);
+    // console.log('productUpdatedDetail: ', productUpdatedDetail);
 
 
     // const onQuantityChange = (value) => {
     //     console.log('changed', value);
     //     setProductUpdatedDetail(value);
     // };
+
+    useEffect(() => {
+
+        let sum = 0;
+
+        for (let index = 0; index < cartProducts?.length; index++) {
+
+            sum = sum + (Number(cartProducts[index]?.quantity) * cartProducts[index]?.price);
+            // console.log('total: ', sum);
+            setTotalAmount(sum);
+        }
+
+    }, [cartProducts]);
 
     return (
         <>
@@ -185,60 +200,67 @@ const Cart = () => {
 
                         </div>
 
-                        <div className='col-md-3'>
+                        {
+                            (totalAmount !== null || totalAmount !== 0) &&
 
-                            <div className="shopping-right_area pt-2">
-                                <h5 className="text-center"> Cart Total </h5>
-                                <div className="shopping-border"></div>
-                                <div className="row mt-3 ps-4 pe-4">
-                                    <div className="col-lg-6 col-md-6 col-sm-6 col-6">
-                                        <p className="left-calc-text"> SUB TOTAL: </p>
+                            <div className='col-md-3'>
+
+                                <div className="shopping-right_area pt-2">
+                                    <h5 className="text-center"> Cart Total </h5>
+                                    <div className="shopping-border"></div>
+                                    <div className="row mt-3 ps-4 pe-4">
+                                        <div className="col-lg-6 col-md-6 col-sm-6 col-6">
+                                            <p className="left-calc-text"> SUB TOTAL: </p>
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 col-sm-6 col-6">
+                                            <p className="price text-right"> RS {totalAmount} </p>
+                                        </div>
                                     </div>
-                                    <div className="col-lg-6 col-md-6 col-sm-6 col-6">
-                                        <p className="price text-right"> RS 460.00 </p>
+                                    <div className="row ps-4 pe-4">
+                                        <div className="col-lg-6 col-md-6 col-sm-6 col-6">
+                                            <p className="left-calc-text"> COUPAN CODES: </p>
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 col-sm-6 col-6">
+                                            <p className="price text-right"> 0% </p>
+                                        </div>
+                                    </div>
+                                    <div className="row ps-4 pe-4">
+                                        <div className="col-lg-6 col-md-6 col-sm-6 col-6">
+                                            <p className="left-calc-text"> GRAND TOTAL: </p>
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 col-sm-6 col-6">
+                                            <p className="price text-right"> RS {totalAmount} </p>
+                                        </div>
+                                    </div>
+                                    <div className="row ps-3 pt-md-3 pb-md-3 pe-3">
+                                        <div className="col-lg-7 col-md-7 col-sm-7 col-12">
+                                            <a href="#" className="btn-shopping w-100">
+                                                Continue Shopping
+                                            </a>
+                                        </div>
+                                        <div className="col-lg-5 col-md-5 col-sm-5 ps-0 col-12">
+                                            <Link
+                                                to="/checkout"
+                                                className="btn-checkout w-100 mt-lg-0 mt-md-0 mt-sm-0 mt-2"
+                                            >
+                                                check out
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="row ps-4 pe-4">
-                                    <div className="col-lg-6 col-md-6 col-sm-6 col-6">
-                                        <p className="left-calc-text"> COUPAN CODES: </p>
-                                    </div>
-                                    <div className="col-lg-6 col-md-6 col-sm-6 col-6">
-                                        <p className="price text-right"> 0% </p>
-                                    </div>
-                                </div>
-                                <div className="row ps-4 pe-4">
-                                    <div className="col-lg-6 col-md-6 col-sm-6 col-6">
-                                        <p className="left-calc-text"> GRAND TOTAL: </p>
-                                    </div>
-                                    <div className="col-lg-6 col-md-6 col-sm-6 col-6">
-                                        <p className="price text-right"> RS 460.00 </p>
-                                    </div>
-                                </div>
-                                <div className="row ps-3 pt-md-3 pb-md-3 pe-3">
-                                    <div className="col-lg-7 col-md-7 col-sm-7 col-12">
-                                        <a href="#" className="btn-shopping w-100">
-                                            Continue Shopping
-                                        </a>
-                                    </div>
-                                    <div className="col-lg-5 col-md-5 col-sm-5 ps-0 col-12">
-                                        <Link
-                                            to="/checkout"
-                                            className="btn-checkout w-100 mt-lg-0 mt-md-0 mt-sm-0 mt-2"
-                                        >
-                                            check out
-                                        </Link>
-                                    </div>
-                                </div>
+
+
                             </div>
+                        }
 
 
-                        </div>
 
                     </div>
 
                 </div>
 
             </section>
+            <ToastContainer />
         </>
     )
 }
