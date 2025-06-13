@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { DELETE_USER_CART, GET_USER_CART, LOGIN_USER, REGISTER_USER, UPDATE_PRODUCT_CART, USER_ADD_TO_CART, USER_WISHLIST } from "../../../app-constants";
+import { CREATE_ORDER, DELETE_USER_CART, GET_USER_CART, LOGIN_USER, REGISTER_USER, UPDATE_PRODUCT_CART, USER_ADD_TO_CART, USER_WISHLIST } from "../../../app-constants";
 import userService from "./userService";
 import { toast } from "react-toastify";
 
@@ -97,6 +97,18 @@ export const updateProductCart = createAsyncThunk(UPDATE_PRODUCT_CART, async (ca
     try {
 
         return await userService.updateProductCart(cartDetail);
+
+    } catch (error) {
+        const message = error.response?.data?.message || error.message || 'Something went wrong';
+        return thunkAPI.rejectWithValue(message);
+    }
+});
+
+export const createOrder = createAsyncThunk(CREATE_ORDER, async (orderDetail, thunkAPI) => {
+
+    try {
+
+        return await userService.createOrder(orderDetail);
 
     } catch (error) {
         const message = error.response?.data?.message || error.message || 'Something went wrong';
@@ -247,6 +259,32 @@ export const authSlice = createSlice({
                 }
             })
             .addCase(updateProductCart.rejected, (state, action) => {
+
+                state.isLoading = false;
+                state.isError = true;
+                state.isSuccess = false;
+                state.message = action.error;
+
+                if (state.isSuccess === false) {
+                    toast.success("Something went wrong!");
+                }
+            })
+            // create order
+            .addCase(createOrder.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(createOrder.fulfilled, (state, action) => {
+
+                state.isLoading = false;
+                state.isError = false;
+                state.isSuccess = true;
+                state.orderedProduct = action.payload;
+
+                if (state.isSuccess) {
+                    toast.success("Ordered Successfully!");
+                }
+            })
+            .addCase(createOrder.rejected, (state, action) => {
 
                 state.isLoading = false;
                 state.isError = true;

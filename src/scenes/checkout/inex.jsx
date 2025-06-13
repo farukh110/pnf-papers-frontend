@@ -7,6 +7,13 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
+import axios from 'axios';
+import { config } from '../../redux/utilities/base_url';
+import { createOrder } from '../../redux/api/user/userSlice';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_SECRET_KEY);
 
 const shippingSchema = Yup.object({
 
@@ -20,13 +27,88 @@ const shippingSchema = Yup.object({
 
 });
 
+const cardStyle = {
+    style: {
+        base: {
+            color: "#212529",
+            fontSize: "16px",
+            fontSmoothing: "antialiased",
+            fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+            "::placeholder": {
+                color: "#6c757d",
+            },
+            padding: "10px 12px",
+        },
+        invalid: {
+            color: "#dc3545",
+            iconColor: "#dc3545",
+        },
+    },
+};
+
+// Stripe form component
+const StripeCheckoutForm = ({ amount, cartProductState, shippingInfo }) => {
+    const stripe = useStripe();
+    const elements = useElements();
+    const dispatch = useDispatch();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const { data } = await axios.post('http://localhost:5000/api/user/order/checkout', {
+            amount: amount + 200,
+        }, config);
+
+        const clientSecret = data.clientSecret;
+
+        const result = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: elements.getElement(CardElement),
+            },
+        });
+
+        if (result.error) {
+            alert(result.error.message);
+        } else {
+            if (result.paymentIntent.status === 'succeeded') {
+                alert('Payment Successful!');
+                dispatch(
+                    createOrder({
+                        totalPrice: amount,
+                        totalPriceAfterDiscount: amount,
+                        orderItems: cartProductState,
+                        shippingInfo,
+                        paymentInfo: {
+                            id: result.paymentIntent.id,
+                            status: result.paymentIntent.status,
+                            method: 'card',
+                        },
+                    })
+                );
+            }
+        }
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <CardElement options={cardStyle} className="form-control" />
+            <button type="submit" className="btn btn-success mt-3" disabled={!stripe}>
+                Pay {amount + 200} Rs
+            </button>
+        </form>
+    );
+};
+
 const CheckOut = () => {
 
-    const { cartProducts, isLoading, isError, isSuccess } = useSelector((state) => state.auth);
+    const { cartProducts } = useSelector((state) => state.auth);
 
     const [productUpdatedDetail, setProductUpdatedDetail] = useState(null);
     const [totalAmount, setTotalAmount] = useState(null);
     const [shippingInfo, setShippingInfo] = useState(null);
+    const [paymentInfo, setPaymentInfo] = useState(null);
+
+    const [cartProductState, setCartProductState] = useState([]);
 
     const dispatch = useDispatch();
 
@@ -44,6 +126,22 @@ const CheckOut = () => {
         }
 
     }, [cartProducts]);
+
+    useEffect(() => {
+
+        let items = [];
+
+        for (let index = 0; index < cartProducts?.length; index++) {
+
+            items.push({ product: cartProducts[index]?.productId._id, quantity: cartProducts[index]?.quantity, color: cartProducts[index]?.color._id, price: cartProducts[index]?.price });
+        }
+
+        setCartProductState(items);
+
+    }, [])
+
+    console.log('cartProductState: ', cartProductState);
+
 
     return (
         <>
@@ -102,6 +200,7 @@ const CheckOut = () => {
                                         console.log("Form submitted:", values);
                                         // your submission logic
                                         setShippingInfo(values);
+                                        // checkoutHandler();
                                     }}
                                 >
                                     {({ setFieldValue, setFieldTouched, values }) => (
@@ -230,6 +329,18 @@ const CheckOut = () => {
                                         </Form>
                                     )}
                                 </Formik>
+
+                                {shippingInfo && (
+                                    <div className="mt-4">
+                                        <Elements stripe={stripePromise}>
+                                            <StripeCheckoutForm
+                                                amount={totalAmount}
+                                                cartProductState={cartProductState}
+                                                shippingInfo={shippingInfo}
+                                            />
+                                        </Elements>
+                                    </div>
+                                )}
 
 
                             </div>

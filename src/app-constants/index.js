@@ -11,6 +11,8 @@ export const DELETE_USER_CART = "DELETE_USER_CART";
 
 export const UPDATE_PRODUCT_CART = "UPDATE_PRODUCT_CART";
 
+export const CREATE_ORDER = "CREATE_ORDER";
+
 export const RESET_ALL = "RESET_ALL";
 
 export const GET_ALL_BLOGS = "GET_ALL_BLOGS";
