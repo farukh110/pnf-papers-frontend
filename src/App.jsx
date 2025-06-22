@@ -19,6 +19,10 @@ import TermsAndConditions from "./scenes/terms-&-conditions";
 import ProductDetail from "./scenes/product-details";
 import Cart from "./scenes/cart";
 import CheckOut from "./scenes/checkout/inex";
+import { PrivateRoutes } from "./routes/PrivateRoutes";
+import { OpenRoutes } from "./routes/OpenRoutes";
+import MyOrders from "./scenes/order";
+import Profile from "./scenes/profile";
 
 const App = () => {
   return (
@@ -31,20 +35,22 @@ const App = () => {
             <Route path='about-us' element={<AboutUs />} />
             <Route path='products' element={<ProductsList />} />
             <Route path='product/:id' element={<ProductDetail />} />
-            <Route path='cart' element={<Cart />} />
+            <Route path='cart' element={<PrivateRoutes> <Cart /> </PrivateRoutes>} />
+            <Route path='orders' element={<PrivateRoutes> <MyOrders /> </PrivateRoutes>} />
+            <Route path='profile' element={<PrivateRoutes> <Profile /> </PrivateRoutes>} />
             <Route path='compare-products' element={<CompareProducts />} />
-            <Route path='wishlist-products' element={<WishlistProducts />} />
+            <Route path='wishlist-products' element={<PrivateRoutes><WishlistProducts /></PrivateRoutes>} />
             <Route path='blogs' element={<BlogList />} />
             <Route path='blog/:id' element={<BlogDetail />} />
             <Route path='contact-us' element={<ContactUs />} />
-            <Route path='login' element={<Login />} />
-            <Route path='register' element={<Register />} />
+            <Route path='login' element={<OpenRoutes> <Login /> </OpenRoutes>} />
+            <Route path='register' element={<OpenRoutes><Register /></OpenRoutes>} />
             <Route path='forgot-password' element={<ForgotPassword />} />
-            <Route path='reset-password' element={<ResetPassword />} />
+            <Route path='reset-password/:token' element={<ResetPassword />} />
             <Route path='privacy-policy' element={<PrivacyPolicy />} />
             <Route path='refund-policy' element={<RefundPolicy />} />
             <Route path='terms-&-conditions' element={<TermsAndConditions />} />
-            <Route path='checkout' element={<CheckOut />} />
+            <Route path='checkout' element={<PrivateRoutes><CheckOut /></PrivateRoutes>} />
 
           </Route>
 

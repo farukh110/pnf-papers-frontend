@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo/pnf-papers.png';
 import './index.scss';
 import { BsCart, BsSearch } from 'react-icons/bs';
@@ -8,14 +8,24 @@ import { LuUser2 } from 'react-icons/lu';
 import { DownOutlined, MenuOutlined } from '@ant-design/icons';
 import { Dropdown, Space } from 'antd';
 import { GoGitCompare } from 'react-icons/go';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { Typeahead } from 'react-bootstrap-typeahead';
+import 'react-bootstrap-typeahead/css/Typeahead.css';
+import { getProduct } from '../../redux/api/product/productSlice';
+
 
 const Header = () => {
 
+    const dispatch = useDispatch();
     const [totalAmount, setTotalAmount] = useState(null);
-    const { cartProducts, isLoading, isError, isSuccess } = useSelector((state) => state.auth);
+    const { cartProducts } = useSelector((state) => state?.auth);
+    const [paginate, setPaginate] = useState(true);
+    const navigate = useNavigate();
 
+    const authState = useSelector(state => state?.auth);
+    const productState = useSelector(state => state?.product?.product);
+    const [productOption, setProductOption] = useState([]);
 
     const items = [
         {
@@ -56,6 +66,28 @@ const Header = () => {
         }
 
     }, [cartProducts]);
+
+    useEffect(() => {
+
+        let data = [];
+
+        for (let index = 0; index < productState?.length; index++) {
+
+            const element = productState[index];
+            data.push({ id: index, prod: element?._id, name: element?.title });
+
+        }
+
+        setProductOption(data);
+
+    }, [productState]);
+
+    const handleLogout = () => {
+
+        localStorage.clear();
+        window.location.reload();
+
+    };
 
     return (
         <>
@@ -106,11 +138,26 @@ const Header = () => {
                             <div className='col-md-5 align-self-center'>
 
                                 <div className="input-group search-bar">
-                                    <input
+                                    {/* <input
                                         type="text"
                                         className="form-control"
                                         aria-label="Enter a keyword to search products"
                                         placeholder='Enter a keyword to search products'
+                                    /> */}
+
+                                    <Typeahead
+                                        id="pagination-example"
+                                        onPaginate={() => console.log('Results paginated')}
+                                        onChange={(selected) => {
+
+                                            navigate(`/product/${selected[0]?.prod}`);
+                                            dispatch(getProduct(selected[0]?.prod));
+                                        }}
+                                        options={productOption}
+                                        paginate={paginate}
+                                        labelKey="name"
+                                        // minLength={2}
+                                        placeholder="Enter a keyword to search products"
                                     />
                                     <span className="input-group-text ps-4 pe-4">
 
@@ -128,7 +175,7 @@ const Header = () => {
 
                                     <div className='col-md-3 ps-0 pe-0'>
 
-                                        <Link className='text-dark' to='/compare-products'>
+                                        {/* <Link className='text-dark' to='/compare-products'>
 
                                             <div className='icon-content'>
 
@@ -137,7 +184,7 @@ const Header = () => {
 
                                             </div>
 
-                                        </Link>
+                                        </Link> */}
 
                                     </div>
 
@@ -159,13 +206,15 @@ const Header = () => {
 
                                     <div className='col-md-3 ps-0 pe-0'>
 
-                                        <Link className='text-dark' to='/login'>
+                                        <Link className='text-dark' to={authState?.user === null ? '/login' : '/profile'}>
 
                                             <div className='icon-content'>
 
                                                 <LuUser2 className='custom-icon' />
 
-                                                <p className='mb-0'> Sign in / Join </p>
+                                                {authState?.user === null ? <p className='mb-0'> Sign in / Join </p> :
+                                                    <p className='mb-0'> Welcome <br /> {authState?.user?.firstname} {authState?.user?.lastname} </p>
+                                                }
 
                                             </div>
 
@@ -230,8 +279,10 @@ const Header = () => {
                                         <li> <NavLink to='/'> Home </NavLink> </li>
                                         <li> <NavLink to='/about-us'> About Us </NavLink> </li>
                                         <li> <NavLink to='/products'> Products </NavLink> </li>
+                                        <li> <NavLink to='/orders'> My Orders </NavLink> </li>
                                         <li> <NavLink to='/blogs'> Blogs </NavLink> </li>
                                         <li> <NavLink to='/contact-us'> Contact Us</NavLink> </li>
+                                        <li onClick={handleLogout} className='text-white logout'> Logout </li>
                                     </ul>
 
                                 </div>

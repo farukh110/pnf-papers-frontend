@@ -13,7 +13,7 @@ import { GoGitCompare, GoHeart } from 'react-icons/go';
 import { IoCopyOutline } from 'react-icons/io5';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProduct } from '../../redux/api/product/productSlice';
+import { addRating, getProduct } from '../../redux/api/product/productSlice';
 import { toast, ToastContainer } from 'react-toastify';
 import { addToCart, getCart } from '../../redux/api/user/userSlice';
 
@@ -25,7 +25,7 @@ const ProductDetail = () => {
     const params = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const [form] = Form.useForm();
     const [color, setColor] = useState(null);
     const [quantity, setQuantity] = useState(1);
     const [alreadyAdded, setAlreadyAdded] = useState(false);
@@ -35,16 +35,38 @@ const ProductDetail = () => {
     const { productDetails, isLoading, isError } = useSelector((state) => state.product);
     const { cartProducts } = useSelector((state) => state.auth);
 
+    const [star, setStar] = useState(null);
+    // const [comment, setComment] = useState(null);
+
     console.log('productDetails: ', productDetails);
 
     console.log('color: ', color);
 
 
     const onFinish = (values) => {
-        console.log('Success:', values);
-    };
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+
+        if (star === null) {
+            toast.error("Please add star rating");
+            return;
+        }
+
+        dispatch(addRating({
+            star: star,
+            comment: values.comment,
+            prodId: productId
+        }));
+
+        toast.success("Thank you! Your review has been submitted.");
+
+        setTimeout(() => {
+
+            dispatch(getProduct(productId));
+
+        }, 100);
+
+        // Reset form and rating
+        form.resetFields();
+        setStar(null);
     };
 
     const handleUploadCart = () => {
@@ -113,10 +135,14 @@ const ProductDetail = () => {
         setQuantity(value);
     };
 
+    const handleStarChange = (newRating) => {
+        setStar(newRating);
+    };
+
     return (
         <>
             <BreadcrumbBanner
-                metaTitle="Product Details"
+                metaTitle={productDetails?.title}
                 metaLink="/product"
                 imageSource={productDetails?.images[0]?.url}
                 imageAlt="Product Details"
@@ -455,7 +481,11 @@ const ProductDetail = () => {
                                             remember: true,
                                         }}
                                         onFinish={onFinish}
-                                        onFinishFailed={onFinishFailed}
+                                        onFinishFailed={() => {
+                                            if (star === null) {
+                                                toast.error("Please add star rating");
+                                            }
+                                        }}
                                         autoComplete="off"
                                         className='review-form'
                                     >
@@ -468,7 +498,8 @@ const ProductDetail = () => {
                                             <ReactStars
                                                 count={5}
                                                 size={24}
-                                                value={3}
+                                                value={star}
+                                                onChange={handleStarChange}
                                                 activeColor="#ffd700"
                                                 edit={true}
                                             />
@@ -501,49 +532,31 @@ const ProductDetail = () => {
 
                                     <div className="reviews-list mt-md-3">
 
-                                        <div className='customer-review'>
+                                        {productDetails && productDetails?.ratings?.map((item) => {
+                                            return (
+                                                <div key={item?._id} className='customer-review'>
 
-                                            <h5 className='mt-md-1 mb-0'> Customer Name </h5>
+                                                    {/* <h5 className='mt-md-1 mb-0'> Customer Name </h5> */}
 
-                                            <ReactStars
-                                                count={5}
-                                                size={24}
-                                                value={3}
-                                                edit={false}
-                                                activeColor="#ffd700"
-                                            />
+                                                    <ReactStars
+                                                        count={5}
+                                                        size={24}
+                                                        value={item.star}
+                                                        edit={false}
+                                                        activeColor="#ffd700"
+                                                    />
 
-                                            <p className='mb-0'>
-                                                Haining Fuxing Compound New Material Co., Ltd.Custom manufacturer. was
-                                                established in 2003. We are specialized in producing customized PVC flex
-                                                banner materials. Provide (240-800gsm) PVC flex banners.
-                                            </p>
+                                                    <p className='mb-0'>
 
-                                            <Divider />
+                                                        {item.comment}
 
-                                        </div>
+                                                    </p>
 
-                                        <div className='customer-review'>
+                                                    <Divider />
 
-                                            <h5 className='mt-md-1 mb-0'> Customer Name </h5>
-
-                                            <ReactStars
-                                                count={5}
-                                                size={24}
-                                                value={3}
-                                                edit={false}
-                                                activeColor="#ffd700"
-                                            />
-
-                                            <p className='mb-0'>
-                                                Haining Fuxing Compound New Material Co., Ltd.Custom manufacturer. was
-                                                established in 2003. We are specialized in producing customized PVC flex
-                                                banner materials. Provide (240-800gsm) PVC flex banners.
-                                            </p>
-
-                                            <Divider />
-
-                                        </div>
+                                                </div>
+                                            )
+                                        })}
 
                                     </div>
 

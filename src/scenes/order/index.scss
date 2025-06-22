@@ -1,0 +1,19 @@
+.color-collection {
+
+    ul {
+
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding-left: 0px !important;
+        margin-bottom: 0px;
+
+        li {
+            width: 20px;
+            height: 20px;
+            background: red;
+            border-radius: 50%;
+        }
+    }
+}

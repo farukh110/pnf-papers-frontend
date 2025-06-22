@@ -1,6 +1,6 @@
 import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import productService from './productService';
-import { ADD_TO_WISHLIST, GET_ALL_PRODUCTS, GET_PRODUCT, RESET_ALL } from './../../../app-constants/index';
+import { ADD_RATING, ADD_TO_WISHLIST, GET_ALL_PRODUCTS, GET_PRODUCT, RESET_ALL } from './../../../app-constants/index';
 
 const initialState = {
     product: "",
@@ -15,12 +15,13 @@ const initialState = {
 
 // get all products
 
-export const getAllProducts = createAsyncThunk(GET_ALL_PRODUCTS, async (thunkAPI) => {
+export const getAllProducts = createAsyncThunk(GET_ALL_PRODUCTS, async (data, thunkAPI) => {
 
     try {
 
-        const response = await productService.getAllProducts();
+        const response = await productService.getAllProducts(data);
         return response;
+        // return response.data;
 
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response?.data || error.message);
@@ -50,6 +51,21 @@ export const addToWishlist = createAsyncThunk(ADD_TO_WISHLIST, async (productId,
     try {
 
         const response = await productService.addToWishlist(productId);
+        return response;
+
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response?.data || error.message);
+    }
+
+});
+
+// add rating
+
+export const addRating = createAsyncThunk(ADD_RATING, async (data, thunkAPI) => {
+
+    try {
+
+        const response = await productService.addRating(data);
         return response;
 
     } catch (error) {
@@ -133,6 +149,29 @@ export const productSlice = createSlice({
                 state.isSuccess = false;
                 state.message = action.error;
             })
+            // add rating
+            .addCase(addRating.pending, (state) => {
+
+                state.isLoading = true;
+
+            })
+            .addCase(addRating.fulfilled, (state, action) => {
+
+                state.isLoading = false;
+                state.isError = false;
+                state.isSuccess = true;
+                state.rating = action.payload;
+                state.message = "Added Rating Successfully!";
+
+            })
+            .addCase(addRating.rejected, (state, action) => {
+
+                state.isLoading = false;
+                state.isError = true;
+                state.isSuccess = false;
+                state.message = action.error;
+            })
+            // reset
             .addCase(resetState, () => initialState);
 
     }

@@ -73,9 +73,9 @@ const ProductCard = (props) => {
                                 <Link to={`/product/${item?._id}`}>
                                     <HiOutlineEye className="custom-icon" />
                                 </Link>
-                                <Link to="#">
+                                {/* <Link to="#">
                                     <GoGitCompare className="custom-icon" />
-                                </Link>
+                                </Link> */}
                                 <Link to="#">
                                     <BsCartPlus className="custom-icon" />
                                 </Link>

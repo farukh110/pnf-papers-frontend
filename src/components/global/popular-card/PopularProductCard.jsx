@@ -74,9 +74,9 @@ const PopularProductCard = ({ item }) => {
                             <HiOutlineEye className="custom-icon" />
                         </Link>
 
-                        <Link>
+                        {/* <Link>
                             <GoGitCompare className="custom-icon" />
-                        </Link>
+                        </Link> */}
 
                         <Link>
                             <BsCartPlus className="custom-icon" />
