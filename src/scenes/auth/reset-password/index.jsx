@@ -1,16 +1,37 @@
 import Meta from '../../../components/global/seo/Meta';
 import PopularProducts from '../../home/popular-products';
-import { Button, Form, Input } from 'antd';
+import { Button, Input } from 'antd';
 import './index.scss';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import * as Yup from 'yup';
+import { Formik, Form } from 'formik';
+import { resetPassword } from '../../../redux/api/user/userSlice';
+import { ToastContainer } from 'react-toastify';
 
 const ResetPassword = () => {
 
-    const onFinish = (values) => {
-        console.log('Success:', values);
-    };
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+    const location = useLocation();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const getToken = location.pathname.split("/")[2];
+
+    const resetPasswordSchema = Yup.object().shape({
+        password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
+    });
+
+    console.log("getToken: ", getToken);
+
+    const onSubmit = async (values, { resetForm }) => {
+        try {
+            const result = await dispatch(resetPassword({ token: getToken, password: values.password })).unwrap();
+            console.log("Password updated:", result);
+            resetForm();
+            navigate('/login', { state: { fromReset: true } });
+        } catch (error) {
+            console.error("Reset password failed:", error);
+            // Optionally show a toast for error
+        }
     };
 
     return (
@@ -32,35 +53,32 @@ const ResetPassword = () => {
 
                                 <h1 className='form-heading'> Reset your password </h1>
 
-                                <Form
-                                    initialValues={{
-                                        remember: true,
-                                    }}
-                                    onFinish={onFinish}
-                                    onFinishFailed={onFinishFailed}
-                                    autoComplete="off"
+                                <Formik
+                                    initialValues={{ password: '' }}
+                                    validationSchema={resetPasswordSchema}
+                                    onSubmit={onSubmit}
                                 >
-                                    <div className='row'>
+                                    {({ handleChange, handleBlur, handleSubmit, values, touched, errors }) => (
 
-                                        <div className='col-md-12'>
+                                        <Form onSubmit={handleSubmit}>
+                                            <div className='row'>
 
-                                            <Form.Item
-                                                name="password"
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                        message: 'Password is required',
-                                                    },
-                                                ]}
-                                            >
-                                                <Input.Password
-                                                    placeholder='Please enter your password'
-                                                />
-                                            </Form.Item>
+                                                <div className='col-md-12'>
 
-                                        </div>
+                                                    <Input.Password
+                                                        name="password"
+                                                        placeholder="Please enter your password"
+                                                        onChange={handleChange}
+                                                        onBlur={handleBlur}
+                                                        value={values.password}
+                                                    />
+                                                    {touched.password && errors.password && (
+                                                        <div className="text-danger mt-1">{errors.password}</div>
+                                                    )}
 
-                                        <div className='col-md-12'>
+                                                </div>
+
+                                                {/* <div className='col-md-12'>
 
                                             <Form.Item
                                                 name="confirm_password"
@@ -76,31 +94,30 @@ const ResetPassword = () => {
                                                 />
                                             </Form.Item>
 
-                                        </div>
+                                        </div> */}
 
-                                        <div className='col-md-3 mt-md-2'>
+                                                <div className='col-md-3 mt-md-3'>
 
-                                            <Form.Item>
-                                                <Button type="primary" className='btn-submit' htmlType="submit">
-                                                    Update
-                                                </Button>
-                                            </Form.Item>
+                                                    <Button type="primary" className='btn-submit' htmlType="submit">
+                                                        Update
+                                                    </Button>
 
-                                        </div>
+                                                </div>
 
-                                        <div className='col-md-3 ps-0 mt-md-2'>
+                                                {/* <div className='col-md-3 ps-0 mt-md-3'>
 
-                                            <Form.Item>
-                                                <Button type="primary" className='btn-submit' htmlType="button">
-                                                    Go Back
-                                                </Button>
-                                            </Form.Item>
+                                                    <Button type="primary" onClick={() => navigate('/')} className='btn-submit' htmlType="button">
+                                                        Go Back
+                                                    </Button>
 
-                                        </div>
+                                                </div> */}
 
-                                    </div>
+                                            </div>
+                                        </Form>
 
-                                </Form>
+                                    )}
+
+                                </Formik>
 
                             </div>
 
@@ -114,6 +131,7 @@ const ResetPassword = () => {
             </section>
 
             <PopularProducts />
+            <ToastContainer position="top-right" autoClose={3000} />
         </>
     )
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Meta from '../../components/global/seo/Meta';
 import { Badge, Breadcrumb, Button, Input, Select } from 'antd';
 import './index.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // import productImg from '../../assets/images/products/products-lisiting.webp';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
@@ -12,6 +12,7 @@ import { config } from '../../redux/utilities/base_url';
 import { createOrder } from '../../redux/api/user/userSlice';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { toast, ToastContainer } from 'react-toastify';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_SECRET_KEY);
 
@@ -48,9 +49,11 @@ const cardStyle = {
 
 // Stripe form component
 const StripeCheckoutForm = ({ amount, cartProductState, shippingInfo }) => {
+
     const stripe = useStripe();
     const elements = useElements();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -68,10 +71,10 @@ const StripeCheckoutForm = ({ amount, cartProductState, shippingInfo }) => {
         });
 
         if (result.error) {
-            alert(result.error.message);
+            toast.error(result.error.message);
         } else {
             if (result.paymentIntent.status === 'succeeded') {
-                alert('Payment Successful!');
+                toast.success('Payment Successful!');
                 dispatch(
                     createOrder({
                         totalPrice: amount,
@@ -85,6 +88,8 @@ const StripeCheckoutForm = ({ amount, cartProductState, shippingInfo }) => {
                         },
                     })
                 );
+
+                navigate('/');
             }
         }
     };
@@ -141,7 +146,6 @@ const CheckOut = () => {
     }, [])
 
     console.log('cartProductState: ', cartProductState);
-
 
     return (
         <>
@@ -456,6 +460,7 @@ const CheckOut = () => {
                 </div>
 
             </section>
+            <ToastContainer position="top-right" autoClose={3000} />
         </>
     )
 }

@@ -18,17 +18,60 @@ const ProductsList = () => {
 
     const { isSuccess, isError, isLoading, product } = useSelector(state => state?.product);
 
+    const [brands, setBrands] = useState(null);
+    const [categories, setCategories] = useState(null);
+    const [tags, setTags] = useState(null);
+    // const [colors, setColors] = useState([]);
+
+    // filter states
+    const [brand, setBrand] = useState(null);
+    const [category, setCategory] = useState(null);
+    const [tag, setTag] = useState(null);
+    // const [color, setColor] = useState([]);
+
+    const [minPrice, setMinPrice] = useState(null);
+    const [maxPrice, setMaxPrice] = useState(null);
+    const [sort, setSort] = useState(null);
+
     console.log('product data: ', product);
+
+    useEffect(() => {
+
+        let brandItems = [];
+        let categoryItems = [];
+        let tagItems = [];
+        // let colorItems = [];
+
+        for (let index = 0; index < product?.length; index++) {
+
+            const element = product[index];
+            brandItems.push(element?.brand);
+            categoryItems.push(element?.category);
+            tagItems.push(element?.tags);
+            // colorItems.push(element.color);
+
+        }
+
+        setBrands(brandItems);
+        setCategories(categoryItems);
+        setTags(tagItems);
+        // setColors(colorItems);
+
+    }, [product]);
+
+    // console.log('brands: ', [... new Set(brands)]);
+    // console.log('categories: ', [... new Set(categories)]);
+    // console.log('tags ', [... new Set(tags)]);
 
     useEffect(() => {
 
         getProducts();
 
-    }, []);
+    }, [sort, tag, brand, category, minPrice, maxPrice]);
 
     const getProducts = () => {
 
-        dispatch(getAllProducts());
+        dispatch(getAllProducts({ sort, tag, brand, category, minPrice, maxPrice }));
     }
 
     const onGridControl = (item) => {
@@ -38,39 +81,45 @@ const ProductsList = () => {
     }
 
     const sortByItems = [
+        // {
+        //     value: '1',
+        //     label: 'Featured',
+        // },
+        // {
+        //     value: '2',
+        //     label: 'Best Selling',
+        // },
         {
-            value: '1',
-            label: 'Featured',
-        },
-        {
-            value: '2',
-            label: 'Best Selling',
-        },
-        {
-            value: '3',
+            value: 'title',
             label: 'Alphabetically, A-Z',
         },
         {
-            value: '4',
+            value: '-title',
             label: 'Alphabetically, Z-A',
         },
         {
-            value: '5',
+            value: 'price',
             label: 'Price, Low to High',
         },
         {
-            value: '6',
+            value: '-price',
             label: 'Price, High to Low',
         },
         {
-            value: '7',
+            value: 'createdAt',
             label: 'Date, Old to New',
         },
         {
-            value: '8',
+            value: '-createdAt',
             label: 'Date, New to Old',
         },
     ];
+
+    const handleSortChange = (value) => {
+        console.log('Selected sort value:', value);
+        setSort(value);
+    };
+
 
     return (
         <>
@@ -93,6 +142,42 @@ const ProductsList = () => {
 
                         <div className='col-md-3'>
 
+                            <div className="accordion filter mb-3">
+                                <div className="accordion-item">
+                                    <h2 className="accordion-header">
+                                        <button
+                                            className="accordion-button"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#category"
+                                            aria-expanded="true"
+                                        >
+                                            Product By Brands
+                                        </button>
+                                    </h2>
+                                    <div
+                                        id="brands"
+                                        className="accordion-collapse collapse show"
+                                    >
+                                        <div className="accordion-body pt-0">
+
+                                            <ul className='category-list ps-0 mb-0'>
+
+                                                {brands && [... new Set(brands)].map((item, index) => {
+
+                                                    return <li onClick={() => setBrand(item)} key={index}>{item}</li>
+
+                                                })
+                                                }
+
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
                             <div className="accordion filter">
                                 <div className="accordion-item">
                                     <h2 className="accordion-header">
@@ -114,10 +199,12 @@ const ProductsList = () => {
 
                                             <ul className='category-list ps-0 mb-0'>
 
-                                                <li>Venial Paper</li>
-                                                <li>Frosted Paper</li>
-                                                <li>Panaflex Paper</li>
-                                                <li>Pak Paper</li>
+                                                {categories && [... new Set(categories)].map((item, index) => {
+
+                                                    return <li onClick={() => setCategory(item)} key={index}>{item}</li>
+
+                                                })
+                                                }
 
                                             </ul>
 
@@ -178,6 +265,7 @@ const ProductsList = () => {
                                                             style={{
                                                                 width: '100%',
                                                             }}
+                                                            onChange={(e) => setMinPrice(e.target.value)}
                                                         />
 
                                                     </div>
@@ -190,6 +278,7 @@ const ProductsList = () => {
                                                             style={{
                                                                 width: '100%',
                                                             }}
+                                                            onChange={(e) => setMaxPrice(e.target.value)}
                                                         />
 
                                                     </div>
@@ -262,11 +351,13 @@ const ProductsList = () => {
 
                                             <div className='product-tags d-flex flex-wrap align-items-center'>
 
-                                                <Tag className='mb-2'>Venial Paper</Tag>
-                                                <Tag className='mb-2'>Silver Paper</Tag>
-                                                <Tag className='mb-2'>Golden Paper</Tag>
-                                                <Tag className='mb-2'>Frosted Paper</Tag>
-                                                <Tag className='mb-2'>Panaflex Paper</Tag>
+
+                                                {tags && [... new Set(tags)].map((item, index) => {
+
+                                                    return <Tag className='mb-2' onClick={() => setTag(item)} key={index}>{item}</Tag>
+
+                                                })
+                                                }
 
                                             </div>
 
@@ -374,6 +465,8 @@ const ProductsList = () => {
                                                     width: "100%",
                                                 }}
                                                 placeholder="Search to Select"
+                                                value={sort}
+                                                onChange={handleSortChange}
                                                 optionFilterProp="label"
                                                 filterSort={(optionA, optionB) =>
                                                     (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())

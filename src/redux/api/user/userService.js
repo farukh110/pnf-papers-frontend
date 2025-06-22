@@ -106,6 +106,42 @@ const createOrder = async (orderDetail) => {
     }
 };
 
+const getUserOrders = async () => {
+
+    const response = await axios.get(`${BACKEND}/user/my-orders`, config);
+
+    if (response.data) {
+        return response.data;
+    }
+};
+
+const updateUser = async (data) => {
+
+    const response = await axios.put(`${BACKEND}/user/edit-user`, data, config);
+
+    if (response.data) {
+        return response.data;
+    }
+};
+
+const forgotPassword = async (data) => {
+
+    const response = await axios.post(`${BACKEND}/user/forgot-password-token`, data);
+
+    if (response.data) {
+        return response.data;
+    }
+};
+
+const resetPassword = async (data) => {
+
+    const response = await axios.put(`${BACKEND}/user/reset-password/${data.token}`, { password: data?.password });
+
+    if (response.data) {
+        return response.data;
+    }
+};
+
 const userService = {
     registerUser,
     loginUser,
@@ -114,7 +150,11 @@ const userService = {
     getCart,
     removeProductFromCart,
     updateProductCart,
-    createOrder
+    createOrder,
+    getUserOrders,
+    updateUser,
+    forgotPassword,
+    resetPassword
 };
 
 export default userService;

@@ -5,15 +5,27 @@ import { ToastContainer, toast } from 'react-toastify';
 import * as Yup from 'yup';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.scss';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { loginUser } from '../../../redux/api/user/userSlice';
+import { useEffect } from 'react';
 
 const Login = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const { isSuccess } = useSelector(state => state.auth);
+
+    useEffect(() => {
+        const cameFromReset = location.state?.fromReset;
+
+        if (isSuccess && !cameFromReset) {
+            navigate('/');
+        }
+    }, [isSuccess, navigate, location]);
 
     const validationSchema = Yup.object().shape({
         email: Yup.string().email('Invalid email').required('Email is required'),
@@ -21,13 +33,11 @@ const Login = () => {
     });
 
     const handleSubmit = async (values, { setSubmitting }) => {
+
         try {
             await dispatch(loginUser(values)).unwrap();
             toast.success('User Logged-In successfully!', { position: "top-right" });
 
-            setTimeout(() => {
-                navigate('/dashboard');
-            }, 2000);
         } catch (error) {
             console.error("Login Error:", error);
             toast.error(error?.message || 'Login failed. Please try again.', { position: "top-right" });
