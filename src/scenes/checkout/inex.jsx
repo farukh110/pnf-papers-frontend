@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import axios from 'axios';
 import { config } from '../../redux/utilities/base_url';
-import { createOrder } from '../../redux/api/user/userSlice';
+import { createOrder, emptyCart } from '../../redux/api/user/userSlice';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { toast, ToastContainer } from 'react-toastify';
@@ -89,7 +89,9 @@ const StripeCheckoutForm = ({ amount, cartProductState, shippingInfo }) => {
                     })
                 );
 
-                navigate('/');
+                dispatch(emptyCart());
+                navigate('/orders');
+
             }
         }
     };

@@ -130,8 +130,10 @@ const Cart = () => {
 
                                                         <span className="quantity-wrapper">
                                                             <InputNumber
+                                                                id={`cart${item?._id}`}
                                                                 min={1}
-                                                                value={productUpdatedDetail?.quantity ? productUpdatedDetail?.quantity : item?.quantity}
+                                                                // value={productUpdatedDetail?.quantity ? productUpdatedDetail?.quantity : item?.quantity}
+                                                                value={item?.quantity}
                                                                 // defaultValue={item?}
                                                                 onChange={(value) => setProductUpdatedDetail({ cartItemId: item?._id, quantity: value })}
                                                             />

@@ -25,18 +25,12 @@ const Register = () => {
     const handleSubmit = async (values, { setSubmitting }) => {
         try {
             await dispatch(registerUser(values)).unwrap();
-            toast.success('Account created successfully!', { position: "top-right" });
-
-            setTimeout(() => {
-
-                navigate('/login');
-
-            }, 4000);
+            setTimeout(() => navigate('/login'), 3000); // Only navigation
         } catch (error) {
-            console.error("Registration Error:", error);
-            toast.error(error?.message || 'Registration failed. Please try again.', { position: "top-right" });
+            console.error("Registration Error:", error); // Toast is handled in slice
+        } finally {
+            setSubmitting(false);
         }
-        setSubmitting(false);
     };
 
 
