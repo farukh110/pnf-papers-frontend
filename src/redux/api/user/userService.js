@@ -19,7 +19,7 @@ const registerUser = async (userData) => {
 
         const response = axios.post(`${BACKEND}/user/register`, userData);
 
-        return response.data;
+        return response;
 
     } catch (error) {
         console.error('Error during register user:', error);
@@ -78,6 +78,15 @@ const getCart = async () => {
         return response?.data
     }
 }
+
+// const getCart = async (data) => {
+
+//     const response = await axios.get(`${BACKEND}/user/cart`, data);
+
+//     if (response?.data) {
+//         return response?.data
+//     }
+// }
 
 const removeProductFromCart = async (cartItemId) => {
 
@@ -142,6 +151,15 @@ const resetPassword = async (data) => {
     }
 };
 
+const emptyCart = async () => {
+
+    const response = await axios.delete(`${BACKEND}/user/empty-cart`, config);
+
+    if (response.data) {
+        return response.data;
+    }
+};
+
 const userService = {
     registerUser,
     loginUser,
@@ -154,7 +172,8 @@ const userService = {
     getUserOrders,
     updateUser,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    emptyCart
 };
 
 export default userService;

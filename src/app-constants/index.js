@@ -17,6 +17,8 @@ export const RESET_PASSWORD = "RESET_PASSWORD";
 export const CREATE_ORDER = "CREATE_ORDER";
 export const ADD_RATING = "ADD_RATING";
 
+export const EMPTY_USER_CART = "EMPTY_USER_CART";
+
 export const RESET_ALL = "RESET_ALL";
 
 export const GET_ALL_BLOGS = "GET_ALL_BLOGS";

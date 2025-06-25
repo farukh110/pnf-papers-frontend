@@ -50,6 +50,7 @@ const Profile = () => {
                             <h1 className='form-heading'>Get In Touch</h1>
 
                             <Formik
+                                enableReinitialize={true}
                                 initialValues={{
                                     firstName: userState.firstname,
                                     lastName: userState.lastname,
@@ -57,9 +58,14 @@ const Profile = () => {
                                     mobile: userState.mobile,
                                 }}
                                 validationSchema={profileSchema}
-                                onSubmit={(values, { resetForm }) => {
-                                    resetForm();
-                                    dispatch(updateUser(values));
+                                onSubmit={(values) => {
+                                    // resetForm();
+                                    dispatch(updateUser({
+                                        firstname: values.firstName,
+                                        lastname: values.lastName,
+                                        email: values.email,
+                                        mobile: values.mobile,
+                                    }));
                                 }}
                             >
                                 {({

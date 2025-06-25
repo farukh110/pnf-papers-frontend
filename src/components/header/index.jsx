@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { getProduct } from '../../redux/api/product/productSlice';
+import { getCart } from '../../redux/api/user/userSlice';
 
 
 const Header = () => {
@@ -81,6 +82,12 @@ const Header = () => {
         setProductOption(data);
 
     }, [productState]);
+
+    useEffect(() => {
+
+        dispatch(getCart());
+
+    }, []);
 
     const handleLogout = () => {
 
