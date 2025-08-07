@@ -50,7 +50,7 @@ const SpecialProductCard = ({ item }) => {
                     <ReactStars
                         count={5}
                         size={24}
-                        value={item?.totalRating}
+                        value={Number(item?.totalRating) || 0}
                         edit={false}
                         activeColor="#ffd700"
                     />

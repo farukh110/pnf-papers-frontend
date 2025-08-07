@@ -21,13 +21,11 @@ const ProductsList = () => {
     const [brands, setBrands] = useState(null);
     const [categories, setCategories] = useState(null);
     const [tags, setTags] = useState(null);
-    // const [colors, setColors] = useState([]);
 
     // filter states
     const [brand, setBrand] = useState(null);
     const [category, setCategory] = useState(null);
     const [tag, setTag] = useState(null);
-    // const [color, setColor] = useState([]);
 
     const [minPrice, setMinPrice] = useState(null);
     const [maxPrice, setMaxPrice] = useState(null);
@@ -40,7 +38,6 @@ const ProductsList = () => {
         let brandItems = [];
         let categoryItems = [];
         let tagItems = [];
-        // let colorItems = [];
 
         for (let index = 0; index < product?.length; index++) {
 
@@ -55,13 +52,8 @@ const ProductsList = () => {
         setBrands(brandItems);
         setCategories(categoryItems);
         setTags(tagItems);
-        // setColors(colorItems);
 
     }, [product]);
-
-    // console.log('brands: ', [... new Set(brands)]);
-    // console.log('categories: ', [... new Set(categories)]);
-    // console.log('tags ', [... new Set(tags)]);
 
     useEffect(() => {
 
@@ -81,14 +73,6 @@ const ProductsList = () => {
     }
 
     const sortByItems = [
-        // {
-        //     value: '1',
-        //     label: 'Featured',
-        // },
-        // {
-        //     value: '2',
-        //     label: 'Best Selling',
-        // },
         {
             value: 'title',
             label: 'Alphabetically, A-Z',
@@ -401,7 +385,7 @@ const ProductsList = () => {
                                                     <ReactStars
                                                         count={5}
                                                         size={24}
-                                                        value="3"
+                                                        value={3}
                                                         edit={false}
                                                         activeColor="#ffd700"
                                                     />
@@ -427,7 +411,7 @@ const ProductsList = () => {
                                                     <ReactStars
                                                         count={5}
                                                         size={24}
-                                                        value="3"
+                                                        value={3}
                                                         edit={false}
                                                         activeColor="#ffd700"
                                                     />

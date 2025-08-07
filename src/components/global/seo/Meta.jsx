@@ -1,18 +1,13 @@
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
 
-const Meta = (props) => {
-
-    const { title, link } = props;
-
+const Meta = ({ title, link }) => {
     return (
         <Helmet>
-
             <meta charSet="utf-8" />
             <title>{title}</title>
-            <Link to={link}> {link} </Link>
+            {link && <link rel="canonical" href={link} />}
         </Helmet>
-    )
-}
+    );
+};
 
 export default Meta;

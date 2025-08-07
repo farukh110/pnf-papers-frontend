@@ -8,12 +8,12 @@ import { FaRegHeart } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { addToWishlist } from "../../../redux/api/product/productSlice";
 
-const ProductCard = (props) => {
+const ProductCard = ({ productsGrid = 4, data = [] }) => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { productsGrid, data } = props;
+    // const { productsGrid, data } = props;
     let location = useLocation();
 
     console.log('data: ', data);

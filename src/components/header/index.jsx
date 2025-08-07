@@ -289,7 +289,11 @@ const Header = () => {
                                         <li> <NavLink to='/orders'> My Orders </NavLink> </li>
                                         <li> <NavLink to='/blogs'> Blogs </NavLink> </li>
                                         <li> <NavLink to='/contact-us'> Contact Us</NavLink> </li>
-                                        <li onClick={handleLogout} className='text-white logout'> Logout </li>
+
+                                        {authState?.user !== null && (
+                                            <li onClick={handleLogout} className='text-white logout'> Logout </li>
+                                        )}
+
                                     </ul>
 
                                 </div>
